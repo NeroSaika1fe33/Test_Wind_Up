@@ -1,7 +1,11 @@
+using System.Resources;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+
+    public static GameManager Instance => Singleton<GameManager>.Instance;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

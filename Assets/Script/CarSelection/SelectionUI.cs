@@ -22,7 +22,6 @@ public class SelectionUI : MonoBehaviour
     private string[] statsName = { "MaxSpeed", "Accerleration", "Weight" };
 
     [Header("DataManagement")]
-    [SerializeField] private PartsDataManager PDManager;
     [SerializeField] private SetParts Car;
     public CustomLists lists;           //データを次のシーンに持ち越すためのDDOL
 
@@ -153,7 +152,7 @@ public class SelectionUI : MonoBehaviour
         if (!updateSignal || Car == null) return;
 
         string partName = items[currentRow][selected[currentRow]];
-        string partID = PDManager.Get_PartsID(partName);
+        string partID = PartsDataManager.Instance.Get_PartsID(partName);
 
         switch (currentRow)
         {
@@ -180,11 +179,11 @@ public class SelectionUI : MonoBehaviour
     {
         for (int i = 0; i < categories.Length; i++)
         {
-            for (int j = 0; j < PDManager.Number_of_Parts; j++)
+            for (int j = 0; j < PartsDataManager.Instance.Number_of_Parts; j++)
             {
-                if (PDManager.Get_PartsType(PDManager.Get_PartsName()[j]) == categories[i])
+                if (PartsDataManager.Instance.Get_PartsType(PartsDataManager.Instance.Get_PartsName()[j]) == categories[i])
                 {
-                    items[i].Add(PDManager.Get_PartsName()[j]);
+                    items[i].Add(PartsDataManager.Instance.Get_PartsName()[j]);
                 }
             }
         }

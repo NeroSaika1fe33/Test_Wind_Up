@@ -8,6 +8,6 @@ public interface IPart
     float weight { get; set; }
     string partsType {  get; set; }
 
-    IAbility ability { get; set; }
+    string abilityName { get; set; }
 
 }

@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class scoreUI : MonoBehaviour
+public class ScoreUI : MonoBehaviour
 {
     public Car_situation car_Situation;
     public TextMeshProUGUI TimeText;

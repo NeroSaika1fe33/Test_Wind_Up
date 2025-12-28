@@ -8,7 +8,7 @@ public class Part : IPart
     public float weight { get; set; }
     public string partsType { get; set; }
 
-    public IAbility ability { get; set; }
+    public string abilityName { get; set; }
 
     public string GetPartsName()
     {

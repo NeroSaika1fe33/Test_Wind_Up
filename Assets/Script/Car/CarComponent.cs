@@ -1,16 +1,20 @@
 using UnityEngine;
+//マルチプレイのためのヘッダ
+//using Fusion;
 
+//Carの機能実装するための親クラス
 public class CarComponent : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public CarEntity car {  get; private set; }
+
+    public virtual void Init(CarEntity _car)
     {
-        
+        car = _car;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public virtual void OnRaceStart() { }
+
+    public virtual void OnRaceEnd() { }
+
+    public virtual void OnAbility(Ability _ability,float _timeUntilCanUse) { }
 }

@@ -1,8 +1,10 @@
 using UnityEngine;
 
-public class CarEntity : MonoBehaviour
+public class CarEntity : CarComponent
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+
+
     void Start()
     {
         DontDestroyOnLoad(gameObject);

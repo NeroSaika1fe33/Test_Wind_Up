@@ -6,9 +6,9 @@
         "Mainspring1",
         "Normal_Tire"
     ],
-    "maxSpeed": 0.0,
-    "acceleration": 0.0,
-    "weight": 0.0,
+    "maxSpeed": 300.0,
+    "acceleration": 200.0,
+    "weight": 140.0,
     "abilityName": "",
     "result": "なし"
 }

@@ -1,16 +1,17 @@
 using System.IO;
+using System.Resources;
 using UnityEngine;
 
 public class PlayerDataManager : MonoBehaviour
 {
-    //シングルトンパターン
-    public static PlayerDataManager Instance { get; private set; }
+    //シングルトン
+    public static PlayerDataManager Instance => Singleton<PlayerDataManager>.Instance;
 
     //一人プレイに仮定する
     public string playerName = "Player1";
     public int playerID = 1;
     public string[] PartsName = new string[3];
-    public string abilityName = "なし";
+    public string abilityName = "None";
 
     private PlayerStats playerStats { get; set; }   
     //Player player { get; private set; }
@@ -18,23 +19,8 @@ public class PlayerDataManager : MonoBehaviour
 
     private string savePath => Path.Combine(Application.dataPath, "SaveData/playData.json");
 
-    //保存するためのデータ
-    //[System.Serializable]
-    //private class PlayerSaveData
-    //{
-    //    public Player player;
-    //    public string result;
-    //}
-
     void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
         DontDestroyOnLoad(gameObject);
 
         Load();
@@ -74,7 +60,7 @@ public class PlayerDataManager : MonoBehaviour
         Debug.Log("保存されたパース：" + savePath);
     }
 
-    //データ
+    //データ読み込む用
     public void Load()
     {
         if (File.Exists(savePath))

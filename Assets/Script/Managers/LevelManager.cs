@@ -1,4 +1,5 @@
 using System;
+using System.Resources;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,7 +15,7 @@ public enum SceneList : int
 public class LevelManager : MonoBehaviour
 {
     //シングルトン
-    public static LevelManager Instance;
+    public static LevelManager Instance => Singleton<LevelManager>.Instance;
 
     public SceneList CurrentScene;
 
@@ -24,13 +25,6 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(this.gameObject);
-            return;
-        }
-
-        Instance = this;
         DontDestroyOnLoad(this.gameObject);
 
         //シーン更新伴う処理
@@ -129,7 +123,7 @@ public class LevelManager : MonoBehaviour
             "InGame" => SceneList.In_Game,
             "Result" => SceneList.Result,
             "Ranking" => SceneList.Ranking,
-            "InGame_ForDebug"=>SceneList.In_Game,   
+            "InGame_ForDebug"=>SceneList.In_Game,   //debug用
             _ => throw new ArgumentOutOfRangeException(nameof(sceneName), $"不明なシーン名: {sceneName}")
         };
     }

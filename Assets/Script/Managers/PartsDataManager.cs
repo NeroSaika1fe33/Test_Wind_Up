@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Resources;
 using UnityEngine;
 
 //CSVの記述方法について
@@ -8,6 +9,9 @@ using UnityEngine;
 //一番左はパーツ名にすること。
 public class PartsDataManager : MonoBehaviour
 {
+    //シングルトン
+    public static PartsDataManager Instance => Singleton<PartsDataManager>.Instance;
+
     int _Number_of_data = 0;
     int _Number_of_Parts = 0;
     List<string> _DataType = new List<string>();                 //パーツデータのデータ型を保存する配列
@@ -27,6 +31,7 @@ public class PartsDataManager : MonoBehaviour
                             //デバッグ表示
                             //PartsDataDebug();
                             //AllPartsData();
+        DontDestroyOnLoad(gameObject);
     }
 
     //パーツデータのデバッグ表示

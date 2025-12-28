@@ -4,7 +4,6 @@ using UnityEngine.Rendering;
 
 public class SetParts : MonoBehaviour
 {
-    public PartsDataManager partsDataManager;
     public string BodyPrefabName = "car_1";
     public string MainspringPrefabName = "Mainspring1";
     public string TirePrefabName = "Normal_Tire";
@@ -29,7 +28,7 @@ public class SetParts : MonoBehaviour
     public void PartsArrangement(string PartsName, Transform Installation_Location)
     {
         //パーツタイプ判別(未使用)
-        string PartsType = partsDataManager.Get_PartsType(PartsName);
+        string PartsType = PartsDataManager.Instance.Get_PartsType(PartsName);
         // コード上では拡張子を付けない
         GameObject prefab = Resources.Load<GameObject>(PartsName);
 
@@ -43,6 +42,7 @@ public class SetParts : MonoBehaviour
         childObject.transform.localScale = new Vector3(1, 1, 1);
 
     }
+
     //パーツ名更新とプリハブ更新
     public void UpdateBodyParts(string PartsName)
     {
