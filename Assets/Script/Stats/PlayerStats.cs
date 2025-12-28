@@ -7,17 +7,38 @@ using UnityEngine.UIElements.Experimental;
 [System.Serializable]
 public class PlayerStats : MonoBehaviour, IStats
 {
+
+    [Header("PlayData")]
     public float maxSpeed { get; set; }
     public float acceleration { get; set; }
     public float weight { get; set; }
     public string abilityName { get; set; } = "None";
 
-    private SetParts Car;
+    private PartsContainer Car;
 
     public Part[] parts { get; private set; } = new Part[3];
+
+    [Header("InGame")]
+    public int maxHP = 3;                // max HP = 3
+    public int currentHP;                //現在のHP（計算用）
+
+
+
+    //ダメージ受け
+    public void TakeDamage(int amount)
+    {
+        currentHP -= amount;
+        if (currentHP < 0) currentHP = 0; //HP>0確保
+    }
+
+    public void ResetHp()
+    {
+        currentHP = 3;
+    }
+
     private void Awake()
     {
-        Car = GetComponentInParent<SetParts>();
+        Car = GetComponentInParent<PartsContainer>();
         //配列初期化
         for (int i = 0; i < parts.Length; i++)
         {
@@ -29,7 +50,8 @@ public class PlayerStats : MonoBehaviour, IStats
     {
         InitParts();
         UpdatePartsStats();
-        
+
+        currentHP = maxHP;
     }
 
     protected void InitParts()

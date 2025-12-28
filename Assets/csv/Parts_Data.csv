@@ -1,8 +1,8 @@
 ﻿string,string,string,int,int,int,int,string
 パーツ名,ID,パーツタイプ,ハンドリング,最高速度,加速度,重量,アビリティ
-ノーマルタイヤ,Normal_Tire,Tire,100,100,100,30,ダッシュ
-オフロードタイヤ,Off-road_Tire,Tire,120,80,100,50,ジャンプ
+ノーマルタイヤ,Normal_Tire,Tire,100,50,40,30,ダッシュ
+オフロードタイヤ,Off-road_Tire,Tire,120,60,20,50,ジャンプ
 車1,car_1,Body,0,0,0,100,なし
 車2,car_2,Body,0,0,0,100,なし
-ゼンマイ1,Mainspring1,Mainspring,0,200,100,10,なし
-ゼンマイ2,Mainspring2,Mainspring,0,100,200,10,なし
+ゼンマイ1,Mainspring1,Mainspring,0,40,50,10,なし
+ゼンマイ2,Mainspring2,Mainspring,0,70,20,10,なし

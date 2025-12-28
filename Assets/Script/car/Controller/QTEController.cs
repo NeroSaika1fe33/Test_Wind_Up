@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 
 //Carを再起動するためのA/D連打
-public class QTEController : MonoBehaviour
+public class QTEController : CarComponent
 {
     [Header("inspector object")]
     public GameObject qtePanel;
@@ -11,9 +11,9 @@ public class QTEController : MonoBehaviour
     public TMP_Text InfoText;
     public TMP_Text timerText;
 
-    [SerializeField] CarHealth carHealth;
+    [SerializeField] PlayerStats PlayerStats;
     public CarController carcontroll;
-    public Goal_contact Goal_Contact;
+    public Goal Goal;
 
     int currentCount = 0;// 現在の連打回数
     int targetCount = 20;// 目標連打回数
@@ -125,14 +125,14 @@ public class QTEController : MonoBehaviour
 
             if (carcontroll != null)
                 carcontroll.OnStartQTESuccess();  // boost
-            Goal_Contact.start_count();
+            Goal.start_count();
 
             return;   // carhealth is not run
         }
 
-        if (carHealth != null)
+        if (PlayerStats != null)
         {
-            Debug.Log(carHealth.currentHP);
+            Debug.Log(PlayerStats.currentHP);
         }
 
         if (carcontroll.canControl == false)
@@ -140,7 +140,7 @@ public class QTEController : MonoBehaviour
             carcontroll.canControl = true;
         }
 
-        carHealth.ResetHp();
+        PlayerStats.ResetHp();
 
     }
 
@@ -179,7 +179,7 @@ public class QTEController : MonoBehaviour
 
             if (carcontroll != null)
                 carcontroll.OnStartQTEFail();
-            Goal_Contact.start_count();
+            Goal.start_count();
         }
         else
         {

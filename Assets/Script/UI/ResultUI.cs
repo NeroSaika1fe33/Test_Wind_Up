@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ResultUI : MonoBehaviour
 {
-    private Car_manager car_Manager;
+    private CarRaceController CarRaceController;
 	public TextMeshProUGUI TimeText;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -14,8 +14,8 @@ public class ResultUI : MonoBehaviour
         Debug.Log(resultObj);
         if (resultObj != null)
         {
-            car_Manager = resultObj.GetComponent<Car_manager>();
-            TimeText.text = $"{car_Manager.Get_GoalTime_m():D2}:{car_Manager.Get_GoalTime_s():D2}:{car_Manager.Get_GoalTime_ms():D3}";
+            CarRaceController = resultObj.GetComponent<CarRaceController>();
+            TimeText.text = $"{CarRaceController.Get_Time_m():D2}:{CarRaceController.Get_Time_s():D2}:{CarRaceController.Get_Time_ms():D3}";
         }
         else
         {

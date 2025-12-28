@@ -22,7 +22,7 @@ public class SelectionUI : MonoBehaviour
     private string[] statsName = { "MaxSpeed", "Accerleration", "Weight" };
 
     [Header("DataManagement")]
-    [SerializeField] private SetParts Car;
+    [SerializeField] private PartsContainer Car;
     public CustomLists lists;           //データを次のシーンに持ち越すためのDDOL
 
     [Header("Input")]
@@ -79,14 +79,12 @@ public class SelectionUI : MonoBehaviour
             currentRow = (currentRow - 1 + 3) % 3;
             updateSignal = true;
             selectionChanged = true;
-
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
             currentRow = (currentRow + 1) % 3;
             updateSignal = true;
             selectionChanged = true;
-
         }
 
         if (Input.GetKeyDown(KeyCode.A))
@@ -96,7 +94,6 @@ public class SelectionUI : MonoBehaviour
                 selected[currentRow] = items[currentRow].Count - 1;
             updateSignal = true;
             selectionChanged = true;
-
         }
 
         if (Input.GetKeyDown(KeyCode.D))
@@ -113,7 +110,6 @@ public class SelectionUI : MonoBehaviour
         {
             UpdatePartsUI();
             UpdateCarInCurrentRow();
-            UpdateSelectedItem();
         }
 
         //選択確認し、カスタマイズ情報保存
@@ -167,13 +163,7 @@ public class SelectionUI : MonoBehaviour
                 break;
         }
     }
-    //Staticクラスの更新
-    void UpdateSelectedItem()
-    {
-        GameSelectionData.body = selected[0];
-        GameSelectionData.mainSpring = selected[1];
-        GameSelectionData.tire = selected[2];
-    }
+
     //パーツデータをPartsDataManagerマネジャーから取得
     void PartsDataSet()
     {

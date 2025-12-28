@@ -1,63 +1,66 @@
 using System;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 [RequireComponent(typeof(Rigidbody))]
 
-public class CarController : MonoBehaviour
+public class CarController : CarComponent
 {
     [Header("SceneManagement")]
     public Vector3 inGameInitPos = new Vector3(50, -2, -95);
 
     [Header("Auto Move")]
     [Range(0f, 1f)]
-    public float autoForwardInput = 0.4f;//自動前進の力 return->inputV
+    public float autoForwardInput = 0.4f;               //自動前進の力 return->inputV
+    float inputV;                                       //自動前進
+    float inputH;                                       //左右
 
-    public GameObject qtePanel;
+    //public GameObject qtePanel;
 
     [Header("Speed")]
-    public float acceleration = 500f;//加速力
-    public float turnSpeed = 3f;//左右旋回の基本速度（FixedUpdateでyaw量に変換）
-    public float maxSpeed = 55f;//最大速度(M/S)
-    public int energy = 1000;
+    [SerializeField] private int energy = 1000;         //エネルギー、未実装
+    [SerializeField] private float turnSpeed = 3f;       //左右旋回の基本速度（FixedUpdateでyaw量に変換）、ステータスから未実装
+    private float acceleration;                         //加速力
+    private float maxSpeed;                             //最大速度(M/S)
 
-    private Rigidbody rb;
-    RigidbodyConstraints normalConstraints;
-
-
-    float inputV;//自動前進
-    float inputH;//左右
     [Header("Gravity")] //重力
-    public float airGravityMultiplier = 2f; // 空中時の重力増幅 (推奨2~6)
-    public float downforcePerSpeed = 0.3f; // 地面に掴む力(ウンフォース)(0.1~0.6)
-    public float maxDownforce = 10f;       //ウンフォース上限 (5~20)
+    public float airGravityMultiplier = 2f;             // 空中時の重力増幅 (推奨2~6)
+    public float downforcePerSpeed = 0.3f;              // 地面に掴む力(ウンフォース)(0.1~0.6)
+    public float maxDownforce = 10f;                    //ウンフォース上限 (5~20)
 
     [Header("Drift")]
-    public KeyCode driftKey = KeyCode.E; //ドリフトきー
-    public float driftMinSpeed = 30f;//発動最低速度
+    public KeyCode driftKey = KeyCode.E;                //ドリフトきー
+    public float driftMinSpeed = 30f;                   //発動最低速度
 
-    public float prepareTime = 2f;//発動掛かる時間
-    public float driftTime = 2f;//発動時間
-    public float cooldownTime = 2f;//冷却時間
+    public float prepareTime = 2f;                      //発動掛かる時間
+    public float driftTime = 2f;                        //発動時間
+    public float cooldownTime = 2f;                     //冷却時間
 
-    public float prepareSpeed = 0.85f;//発動準備時、現時点速度下がる
-    public float driftSpeed = 1.5f;//ドリフト現時点速度掛ける
+    public float prepareSpeed = 0.85f;                  //発動準備時、現時点速度下がる
+    public float driftSpeed = 1.5f;                     //ドリフト現時点速度掛ける
     public float cooldownSpeed = 0.75f;
-    public float boostedSpeed = 0f; //ドリフト開始時、スピード計算用
+    public float boostedSpeed = 0f;                     //ドリフト開始時、スピード計算用
 
     [Header("Wall Knockback")]
-    public string wallTag = "wall";             //unity tag
+    public string wallTag = "Wall";             //unity tag
     public float wallKnockbackSpeed = 20f;      //後退速度
     public float wallKnockbackUp = 2f;          //ぶつかった後、Ｙ軸増やす
     public float wallKnockbackLockTime = 0.2f;  //壁をぶつかる後、CAR LOCK時間
     bool isWallKnockback = false;//発動FLAG
     float wallKnockbackTimer = 0f;
 
+    [Header("InvicibleControl")]
+    bool isInvincible = false;      //無敵状態
+    float invincibleTimer = 0f;     //無敵状態カウントダウン
+    public float invincibleTime = 2f;    // 無敵時間
+    public bool IsInvincible => isInvincible;
+
     public float steerSmooth = 6f;   // 左右入力の追従（大きいほど即反応／小さいほど鈍い）
     float smoothH = 0f;//// 平滑化された左右入力 fixedUpdate用
 
     [Header("Include")]
     public CarHPUI HPUI; //conect UI
-    public CarHealth carHealth; // conect carHealth
+    public PlayerStats PlayerStats; // conect carHealth
     public QTEController qteController; // conect qteController
 
     [Header("Start QTE")]
@@ -106,22 +109,16 @@ public class CarController : MonoBehaviour
     void Start()
     {
         //パネル off
-        if (qtePanel != null)
-            qtePanel.SetActive(false);
+        //if (qtePanel != null)
+        //    qtePanel.SetActive(false);
 
         //Rigidbody初期化（補間＆連続衝突：高速時の抜け対策）
-        rb = GetComponent<Rigidbody>();
-        rb.interpolation = RigidbodyInterpolation.Interpolate;
-        rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
-        rb.maxAngularVelocity = 20f;
-
-        //初期constraintsを保存
-        normalConstraints = rb.constraints;
-        //Debug.Log("game start");
+        car.Rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
+        car.Rigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+        car.Rigidbody.maxAngularVelocity = 20f;
 
         //QTEが終わるまで操作不可
         canControl = false;
-
 
         if (qteController != null)
         {
@@ -133,29 +130,43 @@ public class CarController : MonoBehaviour
             canControl = true;   //QTEなしなら即開始
         }
 
-        if (carHealth == null)
-            carHealth = GetComponent<CarHealth>();
+        if (PlayerStats == null)
+            PlayerStats = GetComponent<PlayerStats>();
 
-        // 選択データ反映（例
-        acceleration += GameSelectionData.addAcceleration;
-        maxSpeed += GameSelectionData.addMaxSpeed;
+        // 選択データ反映
+        acceleration = car.PlayerStats.acceleration;
+        maxSpeed = car.PlayerStats.maxSpeed;
+        Debug.Log(acceleration + " " + maxSpeed);
 
-        //パーツ選択ならフリーズ
+        //インゲーム以外ならフリーズ
         if (LevelManager.Instance.GetCurrentScene() != SceneList.In_Game)
         {
-            rb.constraints = RigidbodyConstraints.FreezePosition;
-            rb.isKinematic = true;
+            car.Rigidbody.constraints = RigidbodyConstraints.FreezePosition;
+            car.Rigidbody.isKinematic = true;
         }
-
-        if (LevelManager.Instance.GetCurrentScene() == SceneList.In_Game)
+        else
         {
-            rb.isKinematic = false;
-            rb.constraints = RigidbodyConstraints.None;
+            car.Rigidbody.isKinematic = false;
+            car.Rigidbody.constraints = RigidbodyConstraints.None;
+            car.Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
             transform.position = inGameInitPos;
         }
 
-        //forDebug
+        //無敵Timer
+        if (isInvincible)
+        {
+            invincibleTimer -= Time.deltaTime;
+            if (invincibleTimer <= 0f)
+            {
+                isInvincible = false;
+                Debug.Log("Invincible end");
+            }
+        }
 
+        if (car.PlayerStats.currentHP <= 0)
+        {
+            CarCrash();
+        }
     }
 
     void Update()
@@ -206,7 +217,6 @@ public class CarController : MonoBehaviour
 
         // どちらかが接地なら接地扱い
         isGrounded = groundedFront || groundedBack;
-
     }
 
     bool RayIsGround(Vector3 origin)
@@ -230,7 +240,7 @@ public class CarController : MonoBehaviour
     void FixedUpdate()
     {
         // FreezeRotationYが設定されているか（※この変数は現状未使用）
-        bool freezeY = (rb.constraints & RigidbodyConstraints.FreezeRotationY) != 0;
+        //bool freezeY = (car.Rigidbody.constraints & RigidbodyConstraints.FreezeRotationY) != 0;
 
 
         // 操作不可なら終了
@@ -239,20 +249,20 @@ public class CarController : MonoBehaviour
         // 着地直後：落下速度yを減衰させてバウンドを抑える
         if (!wasGrounded && isGrounded)
         {
-            Vector3 v = rb.linearVelocity;
+            Vector3 v = car.Rigidbody.linearVelocity;
             if (v.y < 0f) v.y *= landingDamp;
-            rb.linearVelocity = v;
+            car.Rigidbody.linearVelocity = v;
         }
 
         // 接地中：回転（x/z）を減衰して安定化
         if (isGrounded)
         {
-            Vector3 av = rb.angularVelocity;
+            Vector3 av = car.Rigidbody.angularVelocity;
 
             av.x = Mathf.Lerp(av.x, 0f, angularDampOnGround * Time.fixedDeltaTime);
             av.z = Mathf.Lerp(av.z, 0f, angularDampOnGround * Time.fixedDeltaTime);
 
-            rb.angularVelocity = av;
+            car.Rigidbody.angularVelocity = av;
         }
 
         wasGrounded = isGrounded;
@@ -264,8 +274,8 @@ public class CarController : MonoBehaviour
         float speedMul = GetCurrentSpeedMultiplier(); //状態ごとの倍率を取得
 
         //現在速度（m/s）
-        //float currentSpeed = rb.linearVelocity.magnitude;  // liner=rb(x,y,z) magnitude= longspeed sqrt()->m/s
-        Vector3 vel = rb.linearVelocity;
+        //float currentSpeed = car.Rigidbody.linearVelocity.magnitude;  // liner=car.Rigidbody(x,y,z) magnitude= longspeed sqrt()->m/s
+        Vector3 vel = car.Rigidbody.linearVelocity;
         float currentSpeed = vel.magnitude;
 
         //状態込みの最高速
@@ -277,7 +287,7 @@ public class CarController : MonoBehaviour
         // 最高速未満なら前進加速
         if (currentSpeed < currentMaxSpeed)
         {
-            rb.AddForce(transform.forward * inputV * acceleration * speedMul, ForceMode.Acceleration);
+            car.Rigidbody.AddForce(transform.forward * inputV * acceleration * speedMul, ForceMode.Acceleration);
         }
 
 
@@ -294,15 +304,15 @@ public class CarController : MonoBehaviour
             float yawDegPerSec = turnSpeed * 120f * turnMul;
             float yawThisStep = smoothH * yawDegPerSec * Time.fixedDeltaTime;
 
-            float speed = rb.linearVelocity.magnitude;
+            float speed = car.Rigidbody.linearVelocity.magnitude;
             float down = Mathf.Clamp(speed * downforcePerSpeed, 0f, maxDownforce);
-            rb.AddForce(-transform.up * down, ForceMode.Acceleration);
+            car.Rigidbody.AddForce(-transform.up * down, ForceMode.Acceleration);
 
-            rb.MoveRotation(rb.rotation * Quaternion.Euler(0f, yawThisStep, 0f));
+            car.Rigidbody.MoveRotation(car.Rigidbody.rotation * Quaternion.Euler(0f, yawThisStep, 0f));
 
-            Vector3 av = rb.angularVelocity;
+            Vector3 av = car.Rigidbody.angularVelocity;
             av.y = 0f;
-            rb.angularVelocity = av;
+            car.Rigidbody.angularVelocity = av;
         }
 
 
@@ -312,7 +322,7 @@ public class CarController : MonoBehaviour
         // 空中：重力を強める
         if (!isGrounded)
         {
-            rb.AddForce(Physics.gravity * airGravityMultiplier, ForceMode.Acceleration);
+            car.Rigidbody.AddForce(Physics.gravity * airGravityMultiplier, ForceMode.Acceleration);
         }
     }
 
@@ -322,7 +332,7 @@ public class CarController : MonoBehaviour
         if (!isGrounded) return;
 
         // ワールド速度→ローカル速度へ変換
-        Vector3 v = rb.linearVelocity;
+        Vector3 v = car.Rigidbody.linearVelocity;
         Vector3 localV = transform.InverseTransformDirection(v);
 
         // 横方向（x）だけ減衰：localV.x *= lateralGrip
@@ -330,7 +340,7 @@ public class CarController : MonoBehaviour
         localV.x *= lateralGrip;
 
         // ローカル→ワールドへ戻す
-        rb.linearVelocity = transform.TransformDirection(localV);
+        car.Rigidbody.linearVelocity = transform.TransformDirection(localV);
     }
 
     void ApplyAntiLift()
@@ -343,10 +353,10 @@ public class CarController : MonoBehaviour
         if (!tilt) return;
 
         // 速度に応じた係数k（0～1）
-        float speed = rb.linearVelocity.magnitude;
+        float speed = car.Rigidbody.linearVelocity.magnitude;
         float k = Mathf.Clamp01(speed / Mathf.Max(1f, maxDownforceSpeed));
 
-        rb.AddForce(-transform.up * antiLiftForce * k, ForceMode.Acceleration);
+        car.Rigidbody.AddForce(-transform.up * antiLiftForce * k, ForceMode.Acceleration);
     }
 
     void HandleDriftInput()
@@ -355,7 +365,7 @@ public class CarController : MonoBehaviour
         if (driftState != DriftState.None)
             return;
 
-        float currentSpeed = rb.linearVelocity.magnitude;
+        float currentSpeed = car.Rigidbody.linearVelocity.magnitude;
 
         // m/s → km/h
         float kmh = currentSpeed * 3.6f;
@@ -402,9 +412,9 @@ public class CarController : MonoBehaviour
                     Debug.Log("Drift start!");// Debug.Log("Drift start!");
 
                     //ブースト：現在速度の方向に boostedSpeed を乗せる
-                    Vector3 boostedVel = rb.linearVelocity.normalized * boostedSpeed;
+                    Vector3 boostedVel = car.Rigidbody.linearVelocity.normalized * boostedSpeed;
 
-                    rb.linearVelocity = boostedVel;
+                    car.Rigidbody.linearVelocity = boostedVel;
 
                     Debug.Log("boosted speed = " + boostedVel.magnitude);
                 }
@@ -451,48 +461,51 @@ public class CarController : MonoBehaviour
     {
 
         // 壁（tag=wall）に当たった時のみ処理
-        if (collision.gameObject.CompareTag("wall"))
+        if (collision.gameObject.CompareTag("Wall"))
         {
             Debug.Log("HIT WALL: " + collision.gameObject.name);
             //無敵中はノックバックしない
-            if (carHealth != null && carHealth.IsInvincible)
+            if (IsInvincible)
             {
                 return;
             }
-
-            ContactPoint contact = collision.GetContact(0);
-
-            // ワールド座標の接触点を車ローカルに変換
-            // localHitPoint.z > 0 なら車の前側、< 0 なら後側
-            Vector3 localHitPoint = transform.InverseTransformPoint(contact.point); //// localHitPoint.z > 0 car infront
-                                                                                    // localHitPoint.z < 0 car back
-                                                                                    // 前側以外（z<=0）は無視
-            if (localHitPoint.z <= 0f)
+            else if (!isInvincible && collision.gameObject.CompareTag("Wall"))       //無敵状態でなく、かつ衝突相手のタグが「Wall」のときだけダメージ処理
             {
-                return;
+                // 壁に当たったら 1 ダメージ
+                GetDamage();
             }
-
-            // 後退方向（-forward）を水平にして正規化
-            Vector3 knockDir = -transform.forward;
-            knockDir.y = 0f;
-            knockDir.Normalize();
-
-            // 速度を一旦0にする（リセット）
-            rb.linearVelocity = Vector3.zero;
-
-            // 後退＋上方向の速度を付与
-            Vector3 newVel = knockDir * wallKnockbackSpeed + Vector3.up * wallKnockbackUp;
-            rb.linearVelocity = newVel;
-
-            // 操作ロック開始
-            isWallKnockback = true;
-            wallKnockbackTimer = 0f;
-            // X回転ロック（転倒防止目的など）
-            //rb.constraints |= RigidbodyConstraints.FreezeRotationX;
         }
+
+        ContactPoint contact = collision.GetContact(0);
+
+        // ワールド座標の接触点を車ローカルに変換
+        // localHitPoint.z > 0 なら車の前側、< 0 なら後側
+        Vector3 localHitPoint = transform.InverseTransformPoint(contact.point); //// localHitPoint.z > 0 car infront
+                                                                                // localHitPoint.z < 0 car back
+                                                                                // 前側以外（z<=0）は無視
+        if (localHitPoint.z <= 0f)
+        {
+            return;
+        }
+
+        // 後退方向（-forward）を水平にして正規化
+        Vector3 knockDir = -transform.forward;
+        knockDir.y = 0f;
+        knockDir.Normalize();
+
+        // 速度を一旦0にする（リセット）
+        car.Rigidbody.linearVelocity = Vector3.zero;
+
+        // 後退＋上方向の速度を付与
+        Vector3 newVel = knockDir * wallKnockbackSpeed + Vector3.up * wallKnockbackUp;
+        car.Rigidbody.linearVelocity = newVel;
+
+        // 操作ロック開始
+        isWallKnockback = true;
+        wallKnockbackTimer = 0f;
+        // X回転ロック（転倒防止目的など）
+        car.Rigidbody.constraints |= RigidbodyConstraints.FreezeRotationX;
     }
-
-
 
     public void OnStartQTESuccess()
     {
@@ -504,13 +517,30 @@ public class CarController : MonoBehaviour
         dir.Normalize();
 
         //初速を設定
-        rb.linearVelocity = dir * startBoostSpeed;
+        car.Rigidbody.linearVelocity = dir * startBoostSpeed;
     }
 
     // QTE失敗でもゲーム開始
     public void OnStartQTEFail()
     {
         canControl = true;
+    }
 
+    void CarCrash()
+    {
+        canControl = false;
+        //TODO:12.28 make QTEController a Prefab 
+        //qteController.Minigame();
+        Debug.Log("Car is crash");
+    }
+
+    void GetDamage()
+    {
+        car.PlayerStats.TakeDamage(1);
+        //無敵on
+        isInvincible = true;
+        invincibleTimer = invincibleTime;
     }
 }
+
+
