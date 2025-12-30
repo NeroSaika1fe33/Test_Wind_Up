@@ -34,7 +34,6 @@ public class LevelManager : MonoBehaviour
 
     private void OnSceneUnloaded(Scene _CurrentScene)
     {
-
     }
 
     private void OnSceneloaded(Scene _CurrentScene, LoadSceneMode _mode)
@@ -50,6 +49,7 @@ public class LevelManager : MonoBehaviour
                 break;
             case SceneList.In_Game:
                 Debug.Log("InGameに入た");
+                GameManager.Instance.InitPlayerInGame();
                 break;
             case SceneList.Result:
                 Debug.Log("Resultに入た");
@@ -91,6 +91,7 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
+        //シーン遷移操作
         if (Input.anyKeyDown && CurrentScene == SceneList.Title)
         {
             LoadScene(SceneList.Car_Selection);
@@ -113,7 +114,7 @@ public class LevelManager : MonoBehaviour
         return CurrentScene;
     }
 
-    //
+    //ゲームシーンの名前転換
     private SceneList ConvertSceneNameToEnum(string sceneName)
     {
         return sceneName switch

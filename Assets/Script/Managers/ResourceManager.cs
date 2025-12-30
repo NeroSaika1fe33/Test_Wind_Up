@@ -9,4 +9,10 @@ public class ResourceManager : MonoBehaviour
     public GameType[] gameType;
     public GameObject[] carPrefab;
     public Texture2D[] texture2Ds;
+    public GameObject CameraPrefab;
+
+    private void Start()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
 }

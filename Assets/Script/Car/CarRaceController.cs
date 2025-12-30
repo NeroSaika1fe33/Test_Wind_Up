@@ -4,42 +4,42 @@ public class CarRaceController : CarComponent
 {
     [Header("RaceTotalTime")]
     float SceneCount = 0;
+    float Timer = 0;    //タイマー
+    bool count = false; //カウントするかどうか
+    float Time1000 = 0; //タイマーを整数にしたもの(誤差修正用)
 
+    [Header("Checkpoint")]
     private int CheckpointIndex { get; set; } = -1;
-    public struct GoalTime
+
+    private GoalTime GoalTime { get; set; }
+
+    private void Start()
     {
-        public short m;
-        public short s;
-        public short ms;
-    }
-    private GoalTime _GoalTime = new GoalTime { m = 1, s = 30, ms = 500 };
-    public void Set_Time(short m, short s, short ms)
-    {
-        _GoalTime.m = m;
-        _GoalTime.s = s;
-        _GoalTime.ms = ms;
-    }
-    public short Get_Time_m()
-    {
-        return _GoalTime.m;
-    }
-    public short Get_Time_s()
-    {
-        return _GoalTime.s;
-    }
-    public short Get_Time_ms()
-    {
-        return _GoalTime.ms;
+        GoalTime = new GoalTime();
     }
 
-    public void SetCountDown(float f)//ゴール後にResultに行くまでの時間
+    private void Update()
     {
-        SceneCount = f;
+        CountTotalTime();
+
+        //ゴール後カウントダウンの後シーン遷移
+        AfterGaol();
     }
 
-    public void ProcessGoal(Goal _goal)
+    //トータルタイマー
+    private void CountTotalTime()
     {
-        car.Controller.canControl = false;
+        if (count)
+        {
+            Timer += Time.deltaTime;
+            Time1000 = Timer * 1000;
+            float rest = Time1000 % 1;
+            Time1000 -= rest;
+        }
+    }
+    //ゴール後カウントダウン
+    private void AfterGaol()
+    {
         if (SceneCount > 0)
         {
             SceneCount -= Time.deltaTime;
@@ -50,6 +50,56 @@ public class CarRaceController : CarComponent
             }
         }
     }
+    #region Start
+    public void start_count()
+    {
+        count = true;
+    }
+    public void stop_count()
+    {
+        count = false;
+    }
+    #endregion
+    #region TotalTime
+    public short Get_Time_ms()//タイマーのミリ秒を返す
+    {
+        return (short)(Time1000 % 1000);
+    }
+    public short Get_Time_s()//タイマーの秒を返す
+    {
+        return (short)(Timer / 1);
+    }
+    public short Get_Time_m()//タイマーの分を返す
+    {
+        return (short)(Timer / 60);
+    }
+    public short Get_Time_h()//タイマーの時を返す
+    {
+        return (short)(Timer / 3600);
+    }
+    public void Set_Time(short m, short s, short ms)
+    {
+        GoalTime.m = m;
+        GoalTime.s = s;
+        GoalTime.ms = ms;
+    }
+    #endregion
+    //ゴール後にResultに行くまでの時間
+    public void SetCountDown(float f)
+    {
+        SceneCount = f;
+    }
+
+    public void ProcessGoal(Goal _goal)
+    {
+        car.Controller.canControl = false;
+        stop_count();
+        //ここのGoalTime更新
+        Set_Time(Get_Time_m(), Get_Time_s(), Get_Time_ms());
+        //プレイデータの部分も更新
+        PlayerDataManager.Instance.SetResult(GoalTime);
+        SetCountDown(3.0f);
+    }
 
     public void ProcessCheckpoint(Checkpoint _checkpoint)
     {
@@ -58,4 +108,18 @@ public class CarRaceController : CarComponent
             CheckpointIndex++;
         }
     }
+
+    //未使用
+    //public short Get_Goal_Time_m()
+    //{
+    //    return _GoalTime.m;
+    //}
+    //public short Get_Goal_Time_s()
+    //{
+    //    return _GoalTime.s;
+    //}
+    //public short Get_Goal_Time_ms()
+    //{
+    //    return _GoalTime.ms;
+    //}
 }

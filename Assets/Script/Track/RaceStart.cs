@@ -1,4 +1,6 @@
 using UnityEngine;
+
+//未使用
 public class RaceStart : MonoBehaviour
 {
     float c = 0;
@@ -19,8 +21,7 @@ public class RaceStart : MonoBehaviour
         }
         if(c <= 0)
         {
-            Goal.start_count();
-
+            //car.RaceCotroller.start_count();
         }
 
 	}
@@ -33,9 +34,9 @@ public class RaceStart : MonoBehaviour
             //レーススタート時に実行
             if (start != null)
             {
-				Goal.start_count();
-                start_move.start();
-                //UnityEngine.Debug.Log("test");
+				//Goal.start_count();
+                //start_move.start();
+                UnityEngine.Debug.Log("test");
             }
         }
     }

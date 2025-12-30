@@ -5,16 +5,6 @@ using TMPro;
 //Carを再起動するためのA/D連打
 public class QTEController : CarComponent
 {
-    [Header("inspector object")]
-    public GameObject qtePanel;
-    public Slider progressBar;
-    public TMP_Text InfoText;
-    public TMP_Text timerText;
-
-    [SerializeField] PlayerStats PlayerStats;
-    public CarController carcontroll;
-    public Goal Goal;
-
     int currentCount = 0;// 現在の連打回数
     int targetCount = 20;// 目標連打回数
 
@@ -25,7 +15,13 @@ public class QTEController : CarComponent
     public float startQTETime = 3f;/// 開始QTEの表示用
     public float timeLimit = 5f; // 制限時間
     float timer = 0f;            // 残り時間
+    float prevStickX = 0f;      //ゲームパッド対応
 
+    //読みやすくするため
+    private CarController Controller => car.Controller;
+    private PlayerStats PlayerStats => car.PlayerStats;
+    private CarRaceController RaceController => car.RaceController;
+    private InGameUI Hud => car.Hud;
 
     void Update()
     {
@@ -34,26 +30,27 @@ public class QTEController : CarComponent
         // 残り時間を減らす
         timer -= Time.deltaTime;
 
+        if(!Hud) return;
+
         //カウントダウン
-        if (isStartGameQTE && timerText != null)
+        if (isStartGameQTE && Hud.timerText != null)
         {
             if (timer > 0f)
             {
                 int display = Mathf.CeilToInt(timer);    // 2.8→3, 1.2→2, 0.3→1 のように切り上げ表示
                 if (display < 0) display = 0;
-                timerText.text = display.ToString();
+                Hud.timerText.text = display.ToString();
             }
             else
             {
-
-                timerText.text = "GO!";
+                Hud.timerText.text = "GO!";
             }
         }
 
         //UI設定
-        if (timerText != null)
+        if (Hud.timerText != null)
         {
-            timerText.text = Mathf.CeilToInt(timer).ToString();
+            Hud.timerText.text = Mathf.CeilToInt(timer).ToString();
         }
 
         //再起動判定
@@ -93,15 +90,15 @@ public class QTEController : CarComponent
 
         UpdateUI();
 
-        if (qtePanel != null)
-            qtePanel.SetActive(true);
+        if (Hud.QTEPanel != null)
+            Hud.QTEPanel.SetActive(true);
 
-        if (InfoText != null) InfoText.text = "A D Key Press repeatedly!";
+        if (Hud.InfoText != null) Hud.InfoText.text = "A D Key Press repeatedly!";
 
-        if (isStartGameQTE && timerText != null)
+        if (isStartGameQTE && Hud.timerText != null)
         {
-            timerText.gameObject.SetActive(true);
-            timerText.text = Mathf.CeilToInt(timer).ToString();   // 3
+            Hud.timerText.gameObject.SetActive(true);
+            Hud.timerText.text = Mathf.CeilToInt(timer).ToString();   // 3
         }
     }
     //再起動成功の処理
@@ -109,35 +106,29 @@ public class QTEController : CarComponent
     {
 
         isRunning = false;
-        if (qtePanel != null)
-            qtePanel.SetActive(false);
-        if (timerText != null)
+        if (Hud.QTEPanel != null)
+            Hud.QTEPanel.SetActive(false);
+        if (Hud.timerText != null)
         {
-            timerText.text = "";
-            timerText.gameObject.SetActive(false);
+            Hud.timerText.text = "";
+            Hud.timerText.gameObject.SetActive(false);
         }
         Debug.Log("QTE Success!");
-        Debug.Log(carcontroll.canControl);
 
         if (isStartGameQTE)
         {
             isStartGameQTE = false;
 
-            if (carcontroll != null)
-                carcontroll.OnStartQTESuccess();  // boost
-            Goal.start_count();
+            if (Controller != null)
+                Controller.OnStartQTESuccess();  // boost
+            RaceController.start_count();
 
             return;   // carhealth is not run
         }
 
-        if (PlayerStats != null)
+        if (Controller.canControl == false)
         {
-            Debug.Log(PlayerStats.currentHP);
-        }
-
-        if (carcontroll.canControl == false)
-        {
-            carcontroll.canControl = true;
+            Controller.canControl = true;
         }
 
         PlayerStats.ResetHp();
@@ -146,10 +137,12 @@ public class QTEController : CarComponent
 
     void UpdateUI()
     {
-        if (progressBar != null)
+        if (!Hud) return;
+
+        if (Hud.progressBar != null)
         {
-            progressBar.maxValue = targetCount;
-            progressBar.value = currentCount;
+            Hud.progressBar.maxValue = targetCount;
+            Hud.progressBar.value = currentCount;
         }
     }
 
@@ -163,13 +156,13 @@ public class QTEController : CarComponent
     void Fail()
     {
         isRunning = false;
-        if (qtePanel != null)
-            qtePanel.SetActive(false);
+        if (Hud.QTEPanel != null)
+            Hud.QTEPanel.SetActive(false);
 
-        if (timerText != null)
+        if (Hud.timerText != null)
         {
-            timerText.text = "";
-            timerText.gameObject.SetActive(false);
+            Hud.timerText.text = "";
+            Hud.timerText.gameObject.SetActive(false);
         }
         Debug.Log("QTE Fail!");
 
@@ -177,15 +170,15 @@ public class QTEController : CarComponent
         {
             isStartGameQTE = false;
 
-            if (carcontroll != null)
-                carcontroll.OnStartQTEFail();
-            Goal.start_count();
+            if (Controller != null)
+                Controller.OnStartQTEFail();
+            RaceController.start_count();
         }
         else
         {
 
-            if (carcontroll != null && !carcontroll.canControl)
-                carcontroll.canControl = true;
+            if (Controller != null && !Controller.canControl)
+                Controller.canControl = true;
         }
     }
 }

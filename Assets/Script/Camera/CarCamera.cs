@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CarCamera : CarComponent,ICameraController
 {
-    public CinemachineCamera Camera;
+    public Transform drivingVP;
 
     public bool ControlCamera(Camera cam)
     {

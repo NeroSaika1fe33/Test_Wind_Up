@@ -172,63 +172,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!1 &2323699043044767024
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5815319434470245358}
-  - component: {fileID: 2314229734679861800}
-  m_Layer: 5
-  m_Name: QTEManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &5815319434470245358
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2323699043044767024}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7571320784587745302}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2314229734679861800
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2323699043044767024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8bc6de3d829bf541bfdc2ad1a55e3fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::QTEController
-  qtePanel: {fileID: 8364091143872969516}
-  progressBar: {fileID: 892226478267784555}
-  InfoText: {fileID: 5547924145881436487}
-  timerText: {fileID: 3286489302764249544}
-  PlayerStats: {fileID: 0}
-  carcontroll: {fileID: 0}
-  Goal: {fileID: 0}
-  startQTETime: 3
-  timeLimit: 5
 --- !u!1 &2381800895013779917
 GameObject:
   m_ObjectHideFlags: 0
@@ -1125,7 +1068,7 @@ GameObject:
   - component: {fileID: 8671740070335406362}
   - component: {fileID: 5824195582930441170}
   m_Layer: 5
-  m_Name: qtePanel
+  m_Name: QTEPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1145,7 +1088,6 @@ RectTransform:
   m_Children:
   - {fileID: 7575649829962066647}
   - {fileID: 355496046357973366}
-  - {fileID: 5815319434470245358}
   m_Father: {fileID: 1854162526845087428}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1390,6 +1332,11 @@ MonoBehaviour:
   - {fileID: 5379558043053725149}
   - {fileID: 7729062359119087042}
   TimeText: {fileID: 2162683801707346270}
+  speedText: {fileID: 412977438129233286}
+  QTEPanel: {fileID: 8364091143872969516}
+  progressBar: {fileID: 892226478267784555}
+  InfoText: {fileID: 5547924145881436487}
+  timerText: {fileID: 3286489302764249544}
 --- !u!1 &8914775669776432053
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,15 +8,18 @@ public class PlayerDataManager : MonoBehaviour
     public static PlayerDataManager Instance => Singleton<PlayerDataManager>.Instance;
 
     //一人プレイに仮定する
-    public string playerName = "Player1";
-    public int playerID = 1;
-    public string[] PartsName = new string[3];
-    public string abilityName = "None";
-
-    private PlayerStats playerStats { get; set; }   
-    //Player player { get; private set; }
+    private string playerName = "Player1";
+    private int playerID = 1;
+    private string[] PartsName = new string[3];
+    private string abilityName = "None";
     public string result { get; private set; }
 
+    //シーンSelectionUIのカスタマイズ情報をここに保存
+    public string[] CustomizeList { get; private set; } = { "車1", "ゼンマイ1", "タイヤ1" };//デフォルト設定
+
+    private PlayerStats playerStats { get; set; }
+
+    public GoalTime GoalTime { get; private set; }
     private string savePath => Path.Combine(Application.dataPath, "SaveData/playData.json");
 
     void Awake()
@@ -46,7 +49,7 @@ public class PlayerDataManager : MonoBehaviour
         PlayerSaveData saveData = new PlayerSaveData(
             playerName,
             playerID,
-            PartsName,
+            CustomizeList,
             playerStats.maxSpeed,
             playerStats.acceleration,
             playerStats.weight,
@@ -80,8 +83,16 @@ public class PlayerDataManager : MonoBehaviour
         this.playerStats = _playerStats;
     }
 
-    private void Update()
+    public void DataStorage(string Body, string Mainspring, string Wheel)
     {
+        CustomizeList[0] = Body;
+        CustomizeList[1] = Mainspring;
+        CustomizeList[2] = Wheel;
     }
 
+    public void SetResult(GoalTime _goalTime)
+    {
+        GoalTime = _goalTime;
+        result = GoalTime.m + ":" + GoalTime.s + ":" + GoalTime.ms;
+    }
 }

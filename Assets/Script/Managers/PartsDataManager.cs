@@ -3,6 +3,14 @@ using System.IO;
 using System.Resources;
 using UnityEngine;
 
+public enum PartsTypeID
+{
+    None,
+    Wheel_Front,
+    Wheel_Back,
+    Zenmai,
+}
+
 //CSVの記述方法について
 //一番上の行はデータ型を入れる。
 //二番目の行はデータ名をいれること。
@@ -20,17 +28,9 @@ public class PartsDataManager : MonoBehaviour
     List<string> _PartsID = new List<string>();                  //パーツIDを保存する配列
     List<List<string>> _PartsData_All = new List<List<string>>();//パーツデータを保存する2次元配列
                                                                  // Start is called once before the first execution of Update after the MonoBehaviour is created
-
-    void Start()
-    {
-
-    }
     private void Awake()
     {
         FileLoad();         //CSVのデータの読み取りと保存
-                            //デバッグ表示
-                            //PartsDataDebug();
-                            //AllPartsData();
         DontDestroyOnLoad(gameObject);
     }
 

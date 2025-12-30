@@ -2,6 +2,7 @@ using System;
 using System.Linq.Expressions;
 using UnityEngine;
 
+//Ô‚Ìó‘ÔŠÇ—
 public class CarSituation : CarComponent
 {
     public enum Steat
@@ -12,12 +13,7 @@ public class CarSituation : CarComponent
         Goal,
         Destroyed,
     }
-
     Steat steat = Steat.None;
-    private void Start()
-    {
-    
-    }
     public Steat Get_Steat()
     {
         return steat;

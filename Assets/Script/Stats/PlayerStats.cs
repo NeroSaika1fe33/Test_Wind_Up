@@ -13,6 +13,7 @@ public class PlayerStats : MonoBehaviour, IStats
     public float acceleration { get; set; }
     public float weight { get; set; }
     public string abilityName { get; set; } = "None";
+    public string result {  get; set; }
 
     private PartsContainer Car;
 
@@ -21,8 +22,6 @@ public class PlayerStats : MonoBehaviour, IStats
     [Header("InGame")]
     public int maxHP = 3;                // max HP = 3
     public int currentHP;                //現在のHP（計算用）
-
-
 
     //ダメージ受け
     public void TakeDamage(int amount)
@@ -45,9 +44,7 @@ public class PlayerStats : MonoBehaviour, IStats
             parts[i] = new Part();
             //parts[i].abilityName = "None";
         }
-    }
-    void Start()
-    {
+
         InitParts();
         UpdatePartsStats();
 
@@ -60,7 +57,7 @@ public class PlayerStats : MonoBehaviour, IStats
         {
             parts[0].partsName = Car.BodyPrefabName;
             parts[1].partsName = Car.MainspringPrefabName;
-            parts[2].partsName = Car.TirePrefabName;
+            parts[2].partsName = Car.FrontWheelPrefabName;
             for (int i = 0; i < parts.Length; i++)
             {
                 string Name = PartsDataManager.Instance.Get_PartsName(parts[i].partsName);
@@ -87,7 +84,7 @@ public class PlayerStats : MonoBehaviour, IStats
     {
         parts[0].partsName = Car.BodyPrefabName;
         parts[1].partsName = Car.MainspringPrefabName;
-        parts[2].partsName = Car.TirePrefabName;
+        parts[2].partsName = Car.FrontWheelPrefabName;
         for (int i = 0; i < parts.Length; i++)
         {
             string Name = PartsDataManager.Instance.Get_PartsName(parts[i].partsName);

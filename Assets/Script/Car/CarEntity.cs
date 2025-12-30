@@ -19,12 +19,15 @@ public class CarEntity : CarComponent
 
     public PlayerStats PlayerStats { get; private set; }
 
+    public CarSituation Situation { get; private set; }
+
+    public PartsContainer PartsContainer { get; private set; }
+
     public QTEController QTEController { get; private set; }
 
-    public CarSituation Situation {  get; private set; }
+    public CarAudio CarAudio { get; private set; }
 
     public Rigidbody Rigidbody { get; private set; }
-
 
     //マルチプレイのため
     //public static readonly List<CarEntity> Cars = new List<CarEntity>();
@@ -38,25 +41,23 @@ public class CarEntity : CarComponent
         RaceController = GetComponent<CarRaceController>();
         AblityController = GetComponent<CarAbilityController>();
         PlayerStats = GetComponent<PlayerStats>();
-        QTEController = GetComponent<QTEController>();
         Situation = GetComponent<CarSituation>();
+        PartsContainer = GetComponent<PartsContainer>();
+        QTEController = GetComponent<QTEController>();
         Rigidbody = GetComponent<Rigidbody>();
+        CarAudio = GetComponent<CarAudio>();
     }
 
     private void Start()
     {
-        DontDestroyOnLoad(gameObject);
+
+
 
         var components = GetComponentsInChildren<CarComponent>();
         foreach (var component in components) component.Init(this);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+    //このオブジェクト参照するUIを初期化
     public void InitInGameUI()
     {
         Hud = Instantiate(ResourceManager.Instance.hudPrefab);
