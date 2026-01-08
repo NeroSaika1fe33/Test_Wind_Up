@@ -703,9 +703,17 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1996261307982595497, guid: 22dc7dfaff834a04092c8c7337d3f87a, type: 3}
+      propertyPath: autoForwardInput
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3397547480521046830, guid: 22dc7dfaff834a04092c8c7337d3f87a, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3848215623913859446, guid: 22dc7dfaff834a04092c8c7337d3f87a, type: 3}
+      propertyPath: m_Mass
+      value: 2500
       objectReference: {fileID: 0}
     - target: {fileID: 3848215623913859446, guid: 22dc7dfaff834a04092c8c7337d3f87a, type: 3}
       propertyPath: m_Constraints
