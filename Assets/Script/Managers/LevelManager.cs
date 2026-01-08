@@ -136,6 +136,7 @@ public class LevelManager : MonoBehaviour
 
     public void OnClickTutorial()
     {
+        Debug.Log("Tutorial Button Clicked!");
         LoadScene(SceneList.Tutorial);
     }
 

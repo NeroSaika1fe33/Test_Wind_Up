@@ -119,52 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &202878678
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 202878680}
-  - component: {fileID: 202878679}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &202878679
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 202878678}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b09cb39ce292e044987d16faf20863b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LevelManager
-  CurrentScene: 0
-  InitScene: 0
---- !u!4 &202878680
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 202878678}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 115.59309, y: 73.08559, z: -134.47102}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &250737249
 GameObject:
   m_ObjectHideFlags: 0
@@ -573,7 +527,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 202878679}
+      - m_Target: {fileID: 813845646}
         m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
         m_MethodName: OnClickSelect
         m_Mode: 1
@@ -1289,10 +1243,10 @@ RectTransform:
   m_Children:
   - {fileID: 1621227581}
   - {fileID: 1588143697}
+  - {fileID: 254191593}
   - {fileID: 2144674889}
   - {fileID: 768064515}
   - {fileID: 1607798432}
-  - {fileID: 254191593}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1509,7 +1463,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 202878679}
+      - m_Target: {fileID: 813845646}
         m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
         m_MethodName: OnClickTutorial
         m_Mode: 1
@@ -1825,4 +1779,3 @@ SceneRoots:
   - {fileID: 1580415248}
   - {fileID: 1715321529}
   - {fileID: 860673991}
-  - {fileID: 202878680}
