@@ -111,15 +111,15 @@ public class CarController : CarComponent
     private Rigidbody Rigidbody => car.Rigidbody;
     private QTEController QTEController => car.QTEController;
     private PlayerStats PlayerStats => car.PlayerStats;
-    private CarAudio CarAudio => car.CarAudio;
+    private CarAudio CarAudio => car.CarAudio;  
     private InGameUI Hud => car.Hud;
     private PartsContainer PartsContainer => car.PartsContainer;
 
     void Start()
     {
         //ƒpƒlƒ‹ off
-        //if (car.Hud.QTEPanel != null)
-        //    car.Hud.QTEPanel.SetActive(false);
+        if (car.Hud.QTEPanel != null)
+            car.Hud.QTEPanel.SetActive(false);
 
         carModel = transform.Find("PartsPos");
 
