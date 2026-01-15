@@ -49,6 +49,7 @@ public class LevelManager : MonoBehaviour
                 break;
             case SceneList.In_Game:
                 Debug.Log("InGame‚É“ü‚½");
+                GameManager.Instance.SetCurrentTrack(FindFirstObjectByType<Track>());
                 GameManager.Instance.InitPlayerInGame();
                 break;
             case SceneList.Result:
