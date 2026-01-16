@@ -66,8 +66,7 @@ public class CarController : CarComponent
         {
             Audio?.StopAccel();
             Audio?.PlayCrash();
-            car.Rigidbody.linearVelocity = Vector3.zero;
-            car.Rigidbody.angularVelocity = Vector3.zero;
+            
 
             //タイマー
             wallKnockbackTimer += Time.deltaTime;

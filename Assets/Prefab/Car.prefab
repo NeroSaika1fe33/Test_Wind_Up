@@ -231,6 +231,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarController
   canControl: 1
+  wallTag: Wall
+  wallKnockbackSpeed: 20
+  wallKnockbackUp: 2
+  wallKnockbackLockTime: 0.2
+  invincibleTime: 2
 --- !u!114 &-6146883935090438086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,7 +274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c7e88831a50f7640adbb52d6441fe35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarLocomotion
-  autoForwardInput: 0.272
+  autoForwardInput: 0.523
   turnSpeed: 3
   steerSmooth: 6
 --- !u!114 &-4219455795802306977
@@ -303,7 +308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarDriftModule
   driftKey: 101
   driftMinSpeed: 30
-  prepareTime: 0.5
+  prepareTime: 2
   driftTime: 1.2
   cooldownTime: 0.6
   prepareSpeed: 0.85

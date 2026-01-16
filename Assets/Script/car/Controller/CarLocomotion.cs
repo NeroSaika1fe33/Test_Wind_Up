@@ -47,11 +47,13 @@ public class CarLocomotion : CarComponent
         // drift 状態
         drift?.TickStateMachine();
 
+        const float KMH_TO_MS = 1f / 3.6f;
+
         float speedMul = drift != null ? drift.SpeedMultiplier : 1f;
         float turnMul = drift != null ? drift.TurnMultiplier : 1f;
 
         float accel = PlayerStats != null ? PlayerStats.acceleration : 0f;
-        float maxSp = PlayerStats != null ? PlayerStats.maxSpeed : 999f;
+        float maxSp = PlayerStats != null ? PlayerStats.maxSpeed * KMH_TO_MS : 20f * KMH_TO_MS;
 
         // 前進
         float currentSpeed = Rigidbody.linearVelocity.magnitude;
@@ -59,9 +61,15 @@ public class CarLocomotion : CarComponent
 
         if (grounded && currentSpeed < currentMax)
         {
-            Rigidbody.AddForce(transform.forward * inputV * accel * speedMul, ForceMode.Acceleration);
+            Rigidbody.AddForce(transform.forward * inputV * accel , ForceMode.Acceleration);
         }
-
+        //速度制限  
+        Vector3 v = Rigidbody.linearVelocity;
+        float speed = v.magnitude;
+        if (speed > currentMax && speed > 0.01f)
+        {
+            Rigidbody.linearVelocity = v.normalized * currentMax;
+        }
         // 左右
         if (grounded)
         {
