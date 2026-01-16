@@ -7,6 +7,7 @@ public enum SceneList : int
 {
     Title,
     Car_Selection,
+    Tutorial,
     In_Game,
     Result,
     Ranking
@@ -77,6 +78,9 @@ public class LevelManager : MonoBehaviour
             case SceneList.Car_Selection:
                 SceneManager.LoadScene("Selection");
                 break;
+            case SceneList.Tutorial: 
+                SceneManager.LoadScene("Tutorial");
+                break;
             case SceneList.In_Game:
                 SceneManager.LoadScene("InGame");
                 break;
@@ -92,11 +96,12 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
+        /*
         //シーン遷移操作
         if (Input.anyKeyDown && CurrentScene == SceneList.Title)
         {
             LoadScene(SceneList.Car_Selection);
-        }
+        }*/
 
         if (Input.GetKeyDown(KeyCode.Return) && CurrentScene == SceneList.Car_Selection)
         {
@@ -107,7 +112,7 @@ public class LevelManager : MonoBehaviour
         {
             LoadScene(SceneList.Title);
             PlayerDataManager.Instance.Save();
-        }
+        } 
     }
 
     public SceneList GetCurrentScene()
@@ -128,5 +133,16 @@ public class LevelManager : MonoBehaviour
             "InGame_ForDebug"=>SceneList.In_Game,   //debug用
             _ => throw new ArgumentOutOfRangeException(nameof(sceneName), $"不明なシーン名: {sceneName}")
         };
+    }
+
+    public void OnClickTutorial()
+    {
+        Debug.Log("Tutorial Button Clicked!");
+        LoadScene(SceneList.Tutorial);
+    }
+
+    public void OnClickSelect()
+    {
+        LoadScene(SceneList.Car_Selection);
     }
 }
