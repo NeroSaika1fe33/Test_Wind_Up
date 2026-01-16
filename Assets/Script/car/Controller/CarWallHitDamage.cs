@@ -1,152 +1,110 @@
 using UnityEngine;
 
-
 [RequireComponent(typeof(Rigidbody))]
 public class CarWallHitDamage : CarComponent
 {
-    [Header("Wall")]
+    [Header("Detect Wall")]
     [SerializeField] private string wallTag = "Wall";
+    [SerializeField] private LayerMask wallLayers = ~0; 
 
     [Header("Damage")]
     [SerializeField] private int damage = 1;
 
     [Header("Invincible")]
-    [SerializeField] private float invincibleTime = 2f;
+    [SerializeField] private float invincibleTime = 1.5f;
+    private bool invincible;
+    private float invTimer;
 
     [Header("Knockback")]
-    [SerializeField] private float wallKnockbackSpeed = 20f;
-    [SerializeField] private float wallKnockbackUp = 2f;
+    [SerializeField] private float knockbackSpeed = 18f;
+    [SerializeField] private float knockbackUp = 1.5f;
+    [SerializeField] private float lockTime = 0.2f;
 
-    [Header("Control Lock")]
-    [SerializeField] private float wallKnockbackLockTime = 0.2f;
+    private bool locked;
+    private float lockTimer;
 
-    private bool isInvincible;
-    private float invincibleTimer;
+    Rigidbody rb;
+    PlayerStats stats;
+    CarController controller;
+    CarAudio audio;
 
-    private bool isKnockbackLock;
-    private float knockbackLockTimer;
-
-    private bool lockedByMe; 
-
-    private Rigidbody Rb => car.Rigidbody;
-    private PlayerStats Stats => car.PlayerStats;
-    private CarController Controller => car.Controller;
-    private InGameUI Hud => car.Hud;
-    private CarAudio Audio => car.CarAudio;
-
-    public bool IsInvincible => isInvincible;
-    public bool IsKnockbackLocked => isKnockbackLock;
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+        stats = car.PlayerStats;
+        controller = car.Controller;
+        audio = car.CarAudio;
+    }
 
     void Update()
     {
-        TickInvincible(Time.deltaTime);
-        TickKnockbackLock(Time.deltaTime);
-    }
-
-    private void TickInvincible(float dt)
-    {
-        if (!isInvincible) return;
-
-        invincibleTimer -= dt;
-        if (invincibleTimer <= 0f)
+        if (invincible)
         {
-            isInvincible = false;
-            
+            invTimer -= Time.deltaTime;
+            if (invTimer <= 0f) invincible = false;
+        }
+
+        if (locked)
+        {
+            lockTimer -= Time.deltaTime;
+            if (lockTimer <= 0f)
+            {
+                locked = false;
+                
+                if (stats != null && stats.currentHP > 0)
+                    controller?.SetCanControl(true);
+            }
         }
     }
 
-    private void TickKnockbackLock(float dt)
+    bool IsWall(GameObject other)
     {
-        if (!isKnockbackLock) return;
+        if (other == null) return false;
+        if (other.CompareTag(wallTag)) return true;
 
-        knockbackLockTimer += dt;
+        int otherLayer = other.layer;
+        return (wallLayers.value & (1 << otherLayer)) != 0;
+    }
+
+    void HitWall(GameObject wallObj)
+    {
+        if (invincible) return;
 
         
-        Audio?.PlayCrash();
+        if (stats != null) stats.TakeDamage(damage);
 
-        if (knockbackLockTimer >= wallKnockbackLockTime)
-        {
-            isKnockbackLock = false;
+        
+        invincible = true;
+        invTimer = invincibleTime;
 
-            
-            if (lockedByMe && ShouldRestoreControl())
-            {
-                Controller?.SetCanControl(true);
-            }
+        
+        Vector3 back = -transform.forward;
+        back.y = 0f;
+        back.Normalize();
 
-            lockedByMe = false;
-        }
+        rb.linearVelocity = Vector3.zero;
+        rb.linearVelocity = back * knockbackSpeed + Vector3.up * knockbackUp;
+
+        
+        controller?.SetCanControl(false);
+        locked = true;
+        lockTimer = lockTime;
+
+        audio?.PlayCrash();
+        Debug.Log("HIT WALL -> damage/knockback: " + wallObj.name);
     }
 
-    private bool ShouldRestoreControl()
+   
+    void OnCollisionEnter(Collision collision)
     {
-      
-        if (Stats != null && Stats.currentHP <= 0) return false;
-
-        if (Hud != null && Hud.QTEPanel != null && Hud.QTEPanel.activeInHierarchy) return false;
-
-        return true;
+        if (!IsWall(collision.gameObject)) return;
+        HitWall(collision.gameObject);
     }
 
-    private void SetInvincible()
+   
+    void OnTriggerEnter(Collider other)
     {
-        isInvincible = true;
-        invincibleTimer = invincibleTime;
-    }
-
-    private void ApplyDamage()
-    {
-        if (Stats == null) return;
-
-        Stats.TakeDamage(damage);
-        SetInvincible();
-    }
-
-    private void LockControlBriefly()
-    {
-        if (Controller == null) return;
-
-      
-        lockedByMe = true;
-        Controller.SetCanControl(false);
-
-        isKnockbackLock = true;
-        knockbackLockTimer = 0f;
-    }
-
-    private void ApplyKnockback()
-    {
-       
-        Vector3 knockDir = -transform.forward;
-        knockDir.y = 0f;
-        knockDir.Normalize();
-
-        Rb.linearVelocity = Vector3.zero;
-        Rb.linearVelocity = knockDir * wallKnockbackSpeed + Vector3.up * wallKnockbackUp;
-    }
-
-    private bool IsFrontHit(Collision collision)
-    {
-     
-        if (collision.contactCount <= 0) return false;
-        ContactPoint contact = collision.GetContact(0);
-        Vector3 localHitPoint = transform.InverseTransformPoint(contact.point);
-        return localHitPoint.z > 0f;
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (!collision.gameObject.CompareTag(wallTag)) return;
-
-       
-        if (isInvincible) return;
-
-      
-        if (!IsFrontHit(collision)) return;
-
-       
-        ApplyDamage();
-        ApplyKnockback();
-        LockControlBriefly();
+        if (!IsWall(other.gameObject)) return;
+        HitWall(other.gameObject);
     }
 }
