@@ -64,7 +64,6 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-
         CurrentScene = InitScene;
     }
     //シーン遷移判定
@@ -130,6 +129,8 @@ public class LevelManager : MonoBehaviour
             "InGame" => SceneList.In_Game,
             "Result" => SceneList.Result,
             "Ranking" => SceneList.Ranking,
+            "Track01"=>SceneList.Track01,
+            ""
             "InGame_ForDebug"=>SceneList.In_Game,   //debug用
             _ => throw new ArgumentOutOfRangeException(nameof(sceneName), $"不明なシーン名: {sceneName}")
         };
@@ -144,5 +145,11 @@ public class LevelManager : MonoBehaviour
     public void OnClickSelect()
     {
         LoadScene(SceneList.Car_Selection);
+    }
+
+    public void OncCickSetTrack01()
+    {
+        Debug.Log("Track01 is selected!");
+        LoadScene(SceneList.Track01)
     }
 }
