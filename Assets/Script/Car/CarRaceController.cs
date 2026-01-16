@@ -118,7 +118,8 @@ public class CarRaceController : CarComponent
     {
         CurrentTransform.position = GameManager.Instance.CurrentTrack.checkpoints[CheckpointIndex].transform.position;
         //現在のスビートを0にする
-        //Controller.currentSpeed = 0.f;
+        car.Rigidbody.linearVelocity =Vector3.zero;
+        //CurrentTransform.rotation = GameManager.Instance.CurrentTrack.checkpoints[CheckpointIndex].transform.rotation;
     }
 
     //未使用
