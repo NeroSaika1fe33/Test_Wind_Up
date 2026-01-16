@@ -51,7 +51,7 @@ public class CarLocomotion : CarComponent
         float turnMul = drift != null ? drift.TurnMultiplier : 1f;
 
         float accel = PlayerStats != null ? PlayerStats.acceleration : 0f;
-        float maxSp = PlayerStats != null ? PlayerStats.maxSpeed : 999f;
+        float maxSp = PlayerStats != null ? PlayerStats.maxSpeed : 50f;
 
         // ëOêi
         float currentSpeed = Rigidbody.linearVelocity.magnitude;
