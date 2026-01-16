@@ -70,4 +70,9 @@ public class CarLocomotion : CarComponent
             Rigidbody.MoveRotation(Rigidbody.rotation * Quaternion.Euler(0f, yawThisStep, 0f));
         }
     }
+
+    public void SetVelocity(Vector3 v)
+    {
+        car.Rigidbody.linearVelocity = v;
+    }
 }
