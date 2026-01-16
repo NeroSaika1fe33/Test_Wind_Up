@@ -126,10 +126,9 @@ public class QTEController : CarComponent
             return;   // carhealth is not run
         }
 
-        if (Controller.canControl == false)
-        {
-            Controller.canControl = true;
-        }
+        
+            Controller?.SetCanControl(true);
+        
 
         PlayerStats.ResetHp();
 

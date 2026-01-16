@@ -12,15 +12,19 @@ GameObject:
   - component: {fileID: 3848215623913859446}
   - component: {fileID: 1813663504983589506}
   - component: {fileID: -5860910932433380016}
-  - component: {fileID: 1996261307982595497}
   - component: {fileID: 6870756851574069051}
   - component: {fileID: 5282313393207014816}
   - component: {fileID: 6046274174697150035}
   - component: {fileID: 37188137374329518}
   - component: {fileID: 980829020082983410}
   - component: {fileID: 3397547480521046830}
-  - component: {fileID: 4848385651523241402}
   - component: {fileID: 5369880708600226067}
+  - component: {fileID: 5052198639686697121}
+  - component: {fileID: -6146883935090438086}
+  - component: {fileID: -2453386107156565033}
+  - component: {fileID: -2912374423014853506}
+  - component: {fileID: -4219455795802306977}
+  - component: {fileID: 5537242705739726882}
   m_Layer: 0
   m_Name: Car
   m_TagString: Player
@@ -106,61 +110,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43668e9447ff0740bf30253469de626, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Car
---- !u!114 &1996261307982595497
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 765880531328942072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db435c5b709f72243a4e2b8e5efbf07c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CarController
-  carModel: {fileID: 0}
-  groundCheckRadius: 0.5
-  groundAlignSpeed: 7.5
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 8
-  autoForwardInput: 1
-  energy: 1000
-  turnSpeed: 3
-  airGravityMultiplier: 2
-  downforcePerSpeed: 0.3
-  maxDownforce: 10
-  driftKey: 101
-  driftMinSpeed: 30
-  prepareTime: 2
-  driftTime: 2
-  cooldownTime: 2
-  prepareSpeed: 0.85
-  driftSpeed: 1.5
-  cooldownSpeed: 0.75
-  boostedSpeed: 0
-  wallTag: Wall
-  wallKnockbackSpeed: 10
-  wallKnockbackUp: 0
-  wallKnockbackLockTime: 0.1
-  invincibleTime: 2
-  steerSmooth: 8
-  startQTECountdown: 3
-  startBoostSpeed: 40
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  groundCheckDistance: 1
-  isGrounded: 0
-  landingDamp: 0.3
-  angularDampOnGround: 6
-  lateralGrip: 1
-  gripOnlyWhenGrounded: 1
-  antiLiftForce: 3
-  maxDownforceSpeed: 50
-  yawTorque: 5
-  yawDamp: 4
-  canControl: 1
 --- !u!114 &6870756851574069051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,20 +195,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
   maxHP: 3
   currentHP: 0
---- !u!114 &4848385651523241402
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 765880531328942072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8bc6de3d829bf541bfdc2ad1a55e3fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::QTEController
-  startQTETime: 3
-  timeLimit: 5
 --- !u!114 &5369880708600226067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,6 +218,98 @@ MonoBehaviour:
   ZenmaiLoop: {fileID: 8300000, guid: 2d6ea1de35e8cff429d58fe776ab0201, type: 3}
   volume: 1
   crashCooldown: 0.15
+--- !u!114 &5052198639686697121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765880531328942072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db435c5b709f72243a4e2b8e5efbf07c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CarController
+  canControl: 1
+--- !u!114 &-6146883935090438086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765880531328942072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8bc6de3d829bf541bfdc2ad1a55e3fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::QTEController
+  startQTETime: 3
+  timeLimit: 5
+--- !u!114 &-2453386107156565033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765880531328942072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ceaac3dceb68204580ba2ad9dd88778, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CarCrashHandler
+--- !u!114 &-2912374423014853506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765880531328942072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c7e88831a50f7640adbb52d6441fe35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CarLocomotion
+  autoForwardInput: 0.272
+  turnSpeed: 3
+  steerSmooth: 6
+--- !u!114 &-4219455795802306977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765880531328942072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e592fe46c3fa26144b457b07ddb6e0de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CarGroundChecker
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  groundCheckDistance: 1
+  slopeLimitDeg: 60
+--- !u!114 &5537242705739726882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765880531328942072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3470a19a1e94d25458d32bc8cd25e249, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CarDriftModule
+  driftKey: 101
+  driftMinSpeed: 30
+  prepareTime: 0.5
+  driftTime: 1.2
+  cooldownTime: 0.6
+  prepareSpeed: 0.85
+  driftSpeed: 1.5
+  cooldownSpeed: 0.9
+  driftTurnMultiplier: 1.2
 --- !u!1 &1116719818426671010
 GameObject:
   m_ObjectHideFlags: 0
