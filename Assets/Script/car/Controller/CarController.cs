@@ -5,7 +5,7 @@ using UnityEngine.Windows;
 public class CarController : CarComponent
 {
     public bool canControl = true;
-
+    [SerializeField] private LayerMask wallLayer;
 
 
     private CarGroundChecker Ground => GetComponent<CarGroundChecker>();
@@ -133,11 +133,16 @@ public class CarController : CarComponent
         return Mathf.Clamp(k, -1f, 1f);
     }
 
+    bool IsWall(GameObject obj)
+    {
+        return (wallLayer.value & (1 << obj.layer)) != 0;
+    }
+
     void OnCollisionEnter(Collision collision)
     {
 
         // 壁（tag=wall）に当たった時のみ処理
-        if (collision.gameObject.CompareTag("Wall"))
+        if (IsWall(collision.gameObject))
         {
             Debug.Log("HIT WALL: " + collision.gameObject.name);
             //無敵中はノックバックしない
@@ -145,7 +150,7 @@ public class CarController : CarComponent
             {
                 return;
             }
-            else if (!isInvincible && collision.gameObject.CompareTag("Wall"))       //無敵状態でなく、かつ衝突相手のタグが「Wall」のときだけダメージ処理
+            else if (!isInvincible && IsWall(collision.gameObject))       //無敵状態でなく、かつ衝突相手のタグが「Wall」のときだけダメージ処理
             {
                 // 壁に当たったら 1 ダメージ
                 GetDamage();

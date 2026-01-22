@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: -2912374423014853506}
   - component: {fileID: -4219455795802306977}
   - component: {fileID: 5537242705739726882}
+  - component: {fileID: 3794945850748930621}
   m_Layer: 0
   m_Name: Car
   m_TagString: Player
@@ -231,6 +232,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarController
   canControl: 1
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 64
   wallTag: Wall
   wallKnockbackSpeed: 20
   wallKnockbackUp: 2
@@ -315,6 +319,27 @@ MonoBehaviour:
   driftSpeed: 1.5
   cooldownSpeed: 0.9
   driftTurnMultiplier: 1.2
+--- !u!114 &3794945850748930621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765880531328942072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 181d95ddb85744f419de8b44b24972f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CarWheelSparkVFX
+  drift: {fileID: 5537242705739726882}
+  wheelPoints:
+  - {fileID: 4852134760431022920}
+  - {fileID: 4981725212695734841}
+  - {fileID: 8825062424374406852}
+  - {fileID: 8336202540575072014}
+  chargeSparkPrefab: {fileID: 3033448107920706903, guid: 2e411634a8c0abb47985232b1e424ce5, type: 3}
+  boostSparkPrefab: {fileID: 3033448107920706903, guid: a8c37790274c1c341b108f29fe8177ad, type: 3}
+  playSeconds: 0.25
 --- !u!1 &1116719818426671010
 GameObject:
   m_ObjectHideFlags: 0

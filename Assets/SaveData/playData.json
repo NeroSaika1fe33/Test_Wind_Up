@@ -2,7 +2,7 @@
     "name": "Player1",
     "id": 1,
     "CustomizeList": [
-        "車2",
+        "車1",
         "ゼンマイ1",
         "タイヤ1"
     ],
@@ -10,5 +10,5 @@
     "acceleration": 0.0,
     "weight": 0.0,
     "abilityName": "None",
-    "result": "0:35:231"
+    "result": "1:79:960"
 }

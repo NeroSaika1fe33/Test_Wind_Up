@@ -1,8 +1,13 @@
 using UnityEngine;
+using System;
 
 // Drift：drift 状態、倍率/boost 発動
 public class CarDriftModule : CarComponent
 {
+    public event Action DriftChargeStarted; //  Preparing（charge）
+    public event Action DriftBoostStarted;  //  Drifting（boost）
+    public float PrepareTime => prepareTime;
+
     private enum DriftState { None, Preparing, Drifting, Cooldown }
 
     [Header("Drift")]
@@ -49,6 +54,8 @@ public class CarDriftModule : CarComponent
         {
             state = DriftState.Preparing;
             timer = 0f;
+            DriftChargeStarted?.Invoke();//chargeからsparke start
+            CarAudio?.StartDriftCharge();
         }
     }
 
@@ -71,7 +78,10 @@ public class CarDriftModule : CarComponent
                     if (vel.sqrMagnitude > 0.001f)
                     {
                         Rigidbody.linearVelocity = vel.normalized * vel.magnitude * driftSpeed;
+                        CarAudio?.StopDriftCharge();
                         CarAudio?.PlayBoost();
+                        DriftBoostStarted?.Invoke();
+
                     }
                 }
                 break;
