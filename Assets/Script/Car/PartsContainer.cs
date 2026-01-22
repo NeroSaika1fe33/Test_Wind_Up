@@ -6,19 +6,10 @@ using UnityEngine.SceneManagement;
 //プレイヤーのパーツ管理
 public class PartsContainer : CarComponent
 {
-    //デフォルト設定
-    //public string BodyPrefabName = "car_1";
-    //public string MainspringPrefabName = "Mainspring1";
-    //public string TirePrefabName = "Normal_Tire";
-
     public string BodyPrefabName = "Car_body1";
     public string MainspringPrefabName = "Car_Zenmai1";
     public string FrontWheelPrefabName = "Car_Tire1";
     public string BackWheelPrefabName = "Car_Tire1";
-
-    //public List<Transform> Installation_Location_Body = new List<Transform>();
-    //public List<Transform> Installation_Location_MainSpring = new List<Transform>();
-    //public List<Transform> Installation_Location_Tire = new List<Transform>();
 
     public Transform Installation_Location_Body;
     [SerializeField] Transform Installation_Location_MainSpring;
@@ -47,19 +38,6 @@ public class PartsContainer : CarComponent
 
     void Start()
     {
-        //Playerがセットされたら、プレイデータからパーツ更新
-        //if (PlayerDataManager.Instance.CustomizeList != null)
-        //{
-        //    BodyPrefabName = PartsDataManager.Instance.Get_PartsID(PlayerDataManager.Instance.CustomizeList[0]);
-        //    MainspringPrefabName = PartsDataManager.Instance.Get_PartsID(PlayerDataManager.Instance.CustomizeList[1]);
-        //    TirePrefabName = PartsDataManager.Instance.Get_PartsID(PlayerDataManager.Instance.CustomizeList[2]);
-        //}
-
-        ////Aをi番目の場所に配置(パーツタイプは自動判別)
-        //PartsArrangement(BodyPrefabName, Installation_Location_Body[0]);
-        //PartsArrangement(MainspringPrefabName, Installation_Location_MainSpring[0]);
-        //PartsArrangement(TirePrefabName, Installation_Location_Tire[0]);
-        //PartsArrangement(TirePrefabName, Installation_Location_Tire[1]);
     }
 
     public void PartsArrangement(string PartsName, Transform Installation_Location)

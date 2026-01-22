@@ -1133,6 +1133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   CurrentTrack: {fileID: 0}
+  TrackID: 0
 --- !u!4 &1190726244
 Transform:
   m_ObjectHideFlags: 0
@@ -1292,7 +1293,7 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 3a1c691b97b052a4da0ab3293d7fa9bc, type: 3}
   CameraPrefab: {fileID: 4361702729692131642, guid: 24e46e668dd973e468860c6bb910188d, type: 3}
   TrackPrefab:
-  - {fileID: 2245134703150757418, guid: 941da83bb4f55ef4d8e48b3d58d9ead6, type: 3}
+  - {fileID: 2245134703150757418, guid: 67fde5f893aaf5640908537e94f372c0, type: 3}
   TrackDefs:
   - {fileID: 11400000, guid: ef0d2503e542a6041877fd2397a2b64e, type: 2}
   - {fileID: 11400000, guid: 4e0b792d7173eca47ab38d8cdf862d6a, type: 2}

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Track03
   m_EditorClassIdentifier: Assembly-CSharp::TrackDefinition
   trackName: SampleTrack
-  trackIcon: {fileID: 21300000, guid: 98ae39f25ac1c994cb32b792c04aa9c5, type: 3}
+  trackIcon: {fileID: 21300000, guid: 7bd59a402ff87404e90b793bb57869c2, type: 3}
   trackID: 2

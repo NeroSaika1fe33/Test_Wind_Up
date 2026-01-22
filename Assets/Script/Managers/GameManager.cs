@@ -13,11 +13,24 @@ public class GameManager : MonoBehaviour
 
     public int TrackID;          //トラックの設定
 
+    public GameObject car;
+
+    public GameObject MyTrack;
+
     //一名プレイ仮定
     private int playerNum = 1;
 
     //シングルトン
     public static GameManager Instance => Singleton<GameManager>.Instance;
+
+    private void Awake()
+    {
+        if (Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
 
     public void InitSelectCarParts()
     {
@@ -26,7 +39,7 @@ public class GameManager : MonoBehaviour
     public void InitPlayerInGame()
     {
         //プリハブ初期化
-        var car = Instantiate(ResourceManager.Instance.carPrefab[0], CurrentTrack.startLinePos[0].position, Quaternion.identity);
+        car = Instantiate(ResourceManager.Instance.carPrefab[0], CurrentTrack.startLinePos[0].position, Quaternion.identity);
 
         //Hudの初期化
         var tempEntity = car.GetComponent<CarEntity>();
@@ -53,7 +66,7 @@ public class GameManager : MonoBehaviour
     public void InitCurrentTrack()
     {
         //var Track = Instantiate(ResourceManager.Instance.TrackPrefab[TrackID], new Vector3(0f, 0f, 0f), Quaternion.identity);
-        var Track = Instantiate(ResourceManager.Instance.TrackPrefab[0], new Vector3(0f, 0f, 0f), Quaternion.identity);
+        MyTrack = Instantiate(ResourceManager.Instance.TrackPrefab[0], new Vector3(0f, 0f, 0f), Quaternion.identity);
     }
 
     public void InitResult()
@@ -64,4 +77,15 @@ public class GameManager : MonoBehaviour
     {
     }
 
+    public void OnDestroyMyTrack()
+    {
+        if (MyTrack != null)
+            Destroy(MyTrack);
+
+    }
+    public void OnDestroyCar()
+    {
+        if (car != null)
+            Destroy(car);
+    }
 }

@@ -24,6 +24,12 @@ public class PlayerDataManager : MonoBehaviour
 
     void Awake()
     {
+
+        if (Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
         DontDestroyOnLoad(gameObject);
 
         Load();

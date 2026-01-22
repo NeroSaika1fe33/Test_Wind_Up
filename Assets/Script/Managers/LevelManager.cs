@@ -27,6 +27,11 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
         DontDestroyOnLoad(this.gameObject);
 
         //シーン更新伴う処理
@@ -36,6 +41,29 @@ public class LevelManager : MonoBehaviour
 
     private void OnSceneUnloaded(Scene _CurrentScene)
     {
+        switch (ConvertSceneNameToEnum(_CurrentScene.name))
+        {
+            case SceneList.Title:
+                Debug.Log("Title から離脱");
+                break;
+            case SceneList.Car_Selection:
+                Debug.Log("CarSelection から離脱");
+                break;
+            case SceneList.In_Game:
+                Debug.Log("InGame から離脱");
+                GameManager.Instance.OnDestroyMyTrack();
+                GameManager.Instance.OnDestroyCar();
+                break;
+            case SceneList.Result:
+                Debug.Log("Result から離脱");
+                break;
+            case SceneList.Ranking:
+                Debug.Log("Ranking から離脱");
+                break;
+            case SceneList.Track_Selection:
+                Debug.Log("TrackSelection から離脱");
+                break;
+        }
     }
 
     private void OnSceneloaded(Scene _CurrentScene, LoadSceneMode _mode)
@@ -82,7 +110,7 @@ public class LevelManager : MonoBehaviour
             case SceneList.Car_Selection:
                 SceneManager.LoadScene("CarSelection");
                 break;
-            case SceneList.Tutorial: 
+            case SceneList.Tutorial:
                 SceneManager.LoadScene("Tutorial");
                 break;
             case SceneList.In_Game:
@@ -103,7 +131,7 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
-        
+
         //シーン遷移操作
         if (Input.GetKeyDown(KeyCode.Return) && CurrentScene == SceneList.Track_Selection)
         {
@@ -119,7 +147,7 @@ public class LevelManager : MonoBehaviour
         {
             LoadScene(SceneList.Title);
             PlayerDataManager.Instance.Save();
-        } 
+        }
     }
 
     public SceneList GetCurrentScene()
@@ -137,9 +165,9 @@ public class LevelManager : MonoBehaviour
             "InGame" => SceneList.In_Game,
             "Result" => SceneList.Result,
             "Ranking" => SceneList.Ranking,
-            "Tutotial"=>SceneList.Tutorial,
-            "TrackSelection"=>SceneList.Track_Selection,
-            "InGame_ForDebug"=>SceneList.In_Game,   //debug用
+            "Tutotial" => SceneList.Tutorial,
+            "TrackSelection" => SceneList.Track_Selection,
+            "InGame_ForDebug" => SceneList.In_Game,   //debug用
             _ => throw new ArgumentOutOfRangeException(nameof(sceneName), $"不明なシーン名: {sceneName}")
         };
     }

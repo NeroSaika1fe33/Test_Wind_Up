@@ -13,8 +13,13 @@ public class ResourceManager : MonoBehaviour
     public GameObject[] TrackPrefab;
     public TrackDefinition[] TrackDefs;
 
-    private void Start()
+    private void Awake()
     {
+        if (Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
         DontDestroyOnLoad(gameObject);
     }
 }
