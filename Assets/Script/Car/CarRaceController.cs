@@ -121,18 +121,4 @@ public class CarRaceController : CarComponent
         car.Rigidbody.linearVelocity =Vector3.zero;
         //CurrentTransform.rotation = GameManager.Instance.CurrentTrack.checkpoints[CheckpointIndex].transform.rotation;
     }
-
-    //–¢Žg—p
-    //public short Get_Goal_Time_m()
-    //{
-    //    return _GoalTime.m;
-    //}
-    //public short Get_Goal_Time_s()
-    //{
-    //    return _GoalTime.s;
-    //}
-    //public short Get_Goal_Time_ms()
-    //{
-    //    return _GoalTime.ms;
-    //}
 }

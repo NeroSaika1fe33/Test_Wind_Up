@@ -10,7 +10,8 @@ public enum SceneList : int
     Tutorial,
     In_Game,
     Result,
-    Ranking
+    Ranking,
+    Track_Selection
 }
 
 public class LevelManager : MonoBehaviour
@@ -46,11 +47,12 @@ public class LevelManager : MonoBehaviour
                 Debug.Log("Titleに入た");
                 break;
             case SceneList.Car_Selection:
-                Debug.Log("Selectionに入た");
+                Debug.Log("CarSelectionに入た");
                 break;
             case SceneList.In_Game:
                 Debug.Log("InGameに入た");
-                GameManager.Instance.SetCurrentTrack(FindFirstObjectByType<Track>());
+                //GameManager.Instance.SetCurrentTrack(FindFirstObjectByType<Track>());
+                GameManager.Instance.InitCurrentTrack();
                 GameManager.Instance.InitPlayerInGame();
                 break;
             case SceneList.Result:
@@ -59,12 +61,14 @@ public class LevelManager : MonoBehaviour
             case SceneList.Ranking:
                 Debug.Log("Rankingに入た");
                 break;
+            case SceneList.Track_Selection:
+                Debug.Log("TrackSelectionに入た");
+                break;
         }
     }
 
     private void Start()
     {
-
         CurrentScene = InitScene;
     }
     //シーン遷移判定
@@ -76,7 +80,7 @@ public class LevelManager : MonoBehaviour
                 SceneManager.LoadScene("Title");
                 break;
             case SceneList.Car_Selection:
-                SceneManager.LoadScene("Selection");
+                SceneManager.LoadScene("CarSelection");
                 break;
             case SceneList.Tutorial: 
                 SceneManager.LoadScene("Tutorial");
@@ -90,22 +94,25 @@ public class LevelManager : MonoBehaviour
             case SceneList.Ranking:
                 SceneManager.LoadScene("Ranking");
                 break;
+            case SceneList.Track_Selection:
+                SceneManager.LoadScene("TrackSelection");
+                break;
         }
         CurrentScene = _NextSceneName;
     }
 
     private void Update()
     {
-        /*
+        
         //シーン遷移操作
-        if (Input.anyKeyDown && CurrentScene == SceneList.Title)
+        if (Input.GetKeyDown(KeyCode.Return) && CurrentScene == SceneList.Track_Selection)
         {
-            LoadScene(SceneList.Car_Selection);
-        }*/
+            LoadScene(SceneList.In_Game);
+        }
 
         if (Input.GetKeyDown(KeyCode.Return) && CurrentScene == SceneList.Car_Selection)
         {
-            LoadScene(SceneList.In_Game);
+            LoadScene(SceneList.Track_Selection);
         }
 
         if (Input.anyKeyDown && CurrentScene == SceneList.Result)
@@ -126,11 +133,12 @@ public class LevelManager : MonoBehaviour
         return sceneName switch
         {
             "Title" => SceneList.Title,
-            "Selection" => SceneList.Car_Selection,
+            "CarSelection" => SceneList.Car_Selection,
             "InGame" => SceneList.In_Game,
             "Result" => SceneList.Result,
             "Ranking" => SceneList.Ranking,
             "Tutotial"=>SceneList.Tutorial,
+            "TrackSelection"=>SceneList.Track_Selection,
             "InGame_ForDebug"=>SceneList.In_Game,   //debug用
             _ => throw new ArgumentOutOfRangeException(nameof(sceneName), $"不明なシーン名: {sceneName}")
         };
