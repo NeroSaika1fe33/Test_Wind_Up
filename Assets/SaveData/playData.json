@@ -2,13 +2,13 @@
     "name": "Player1",
     "id": 1,
     "CustomizeList": [
-        "車1",
-        "ゼンマイ1",
+        "車3",
+        "ゼンマイ2",
         "タイヤ1"
     ],
-    "maxSpeed": 90.0,
-    "acceleration": 90.0,
+    "maxSpeed": 120.0,
+    "acceleration": 60.0,
     "weight": 140.0,
     "abilityName": "None",
-    "result": "0:3:957"
+    "result": "1:72:712"
 }
