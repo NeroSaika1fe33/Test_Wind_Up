@@ -3,12 +3,12 @@
     "id": 1,
     "CustomizeList": [
         "車1",
-        "ゼンマイ2",
-        "タイヤ2"
+        "ゼンマイ1",
+        "タイヤ1"
     ],
-    "maxSpeed": 110.0,
-    "acceleration": 40.0,
-    "weight": 160.0,
+    "maxSpeed": 90.0,
+    "acceleration": 90.0,
+    "weight": 140.0,
     "abilityName": "None",
-    "result": "0:4:122"
+    "result": "0:3:957"
 }
