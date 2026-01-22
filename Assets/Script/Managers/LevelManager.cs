@@ -50,6 +50,7 @@ public class LevelManager : MonoBehaviour
                 break;
             case SceneList.In_Game:
                 Debug.Log("InGameに入た");
+                GameManager.Instance.SetCurrentTrack(FindFirstObjectByType<Track>());
                 GameManager.Instance.InitPlayerInGame();
                 break;
             case SceneList.Result:
@@ -129,6 +130,7 @@ public class LevelManager : MonoBehaviour
             "InGame" => SceneList.In_Game,
             "Result" => SceneList.Result,
             "Ranking" => SceneList.Ranking,
+            "Tutotial"=>SceneList.Tutorial,
             "InGame_ForDebug"=>SceneList.In_Game,   //debug用
             _ => throw new ArgumentOutOfRangeException(nameof(sceneName), $"不明なシーン名: {sceneName}")
         };

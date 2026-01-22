@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 
     private CinemachineCamera cam;       //カメラ制御のため
 
-    private Track CurrentTrack;          //トラックの設定
+    public Track CurrentTrack;          //トラックの設定
 
     //一名プレイ仮定
     private int playerNum = 1;
@@ -23,9 +23,6 @@ public class GameManager : MonoBehaviour
 
     public void InitPlayerInGame()
     {
-        //Track設定
-        CurrentTrack = new SampleTrack();//(仮定)
-
         //プリハブ初期化
         var car = Instantiate(ResourceManager.Instance.carPrefab[0], new Vector3(60f, 55f, -150f), Quaternion.identity);
 
@@ -41,6 +38,11 @@ public class GameManager : MonoBehaviour
         cam.LookAt = car.transform;
     }
 
+    public void SetCurrentTrack(Track _track)
+    {
+        CurrentTrack = _track;
+    }
+
     public void InitResult()
     {
     }
@@ -48,4 +50,5 @@ public class GameManager : MonoBehaviour
     public void InitRanking()
     {
     }
+
 }
