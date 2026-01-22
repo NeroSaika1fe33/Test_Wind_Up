@@ -2,7 +2,8 @@
 パーツ名,ID,パーツタイプ,ハンドリング,最高速度,加速度,重量,アビリティ
 車1,Car_body1,Body,0,30,0,100,なし
 車2,Car_body2,Body,0,0,0,100,なし
-ゼンマイ1,Car_Zenmai1,Mainspring,0,10,50,10,なし
-ゼンマイ2,Car_Zenmai2,Mainspring,0,20,20,10,なし
+車3,countach_body,Body,0,0,0,100,なし
+ゼンマイ1,Car_Zenmai1,Mainspring,0,40,50,10,なし
+ゼンマイ2,Car_Zenmai2,Mainspring,0,70,20,10,なし
 タイヤ1,Car_Tire1,Tire,100,50,40,30,ダッシュ
 タイヤ2,Car_Tire2,Tire,120,60,20,50,ジャンプ
