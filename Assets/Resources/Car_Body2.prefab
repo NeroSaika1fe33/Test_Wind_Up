@@ -1,5 +1,191 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &451080172242873576
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3058491412184612779}
+  m_Layer: 0
+  m_Name: FrontRight_TireRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3058491412184612779
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 451080172242873576}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalPosition: {x: 0.55200195, y: -0.32, z: 1.0240002}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1094522394804284760}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!1 &716135467368837587
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7658940216034581129}
+  m_Layer: 0
+  m_Name: BackRight_TireRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7658940216034581129
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716135467368837587}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.6439972, y: -0.32, z: -0.89000034}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1094522394804284760}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4082300564452774588
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4432490842673735014}
+  m_Layer: 0
+  m_Name: ItemRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4432490842673735014
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4082300564452774588}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.09, z: 0.97}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1094522394804284760}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4324183553002698045
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6238588697467164308}
+  m_Layer: 0
+  m_Name: FrontLeft_TireRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6238588697467164308
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4324183553002698045}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.55200195, y: -0.32, z: 1.0240002}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1094522394804284760}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4924149308047221790
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2171637326757198146}
+  m_Layer: 0
+  m_Name: BackLeft_TireRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2171637326757198146
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4924149308047221790}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.55200195, y: -0.32, z: -0.89000034}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1094522394804284760}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7370201313503816904
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2955113045710752419}
+  m_Layer: 0
+  m_Name: ZenmaiRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2955113045710752419
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7370201313503816904}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.561, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1094522394804284760}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &628884559734868659
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -58,11 +244,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8345ea43ed6506d4a9e1635f54939883, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4432490842673735014}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8345ea43ed6506d4a9e1635f54939883, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3058491412184612779}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8345ea43ed6506d4a9e1635f54939883, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7658940216034581129}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8345ea43ed6506d4a9e1635f54939883, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6238588697467164308}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8345ea43ed6506d4a9e1635f54939883, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2171637326757198146}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8345ea43ed6506d4a9e1635f54939883, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2955113045710752419}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8345ea43ed6506d4a9e1635f54939883, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8294154417137736820}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8345ea43ed6506d4a9e1635f54939883, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6419919245437081981}
   m_SourcePrefab: {fileID: 100100000, guid: 8345ea43ed6506d4a9e1635f54939883, type: 3}
 --- !u!1 &322947443848427490 stripped
 GameObject:
@@ -78,6 +285,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 322947443848427490}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57a618f6aaa882c4084846e38811e604, type: 3}
+  m_Script: {fileID: 11500000, guid: a397a40955abc3b48bb25be0e76fc19c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Part
+--- !u!114 &6419919245437081981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 322947443848427490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e4954f7913bd0341b7db80b5f8681e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PartRoot
+  ZenmaiRoot: {fileID: 2955113045710752419}
+  FrontRight_TireRoot: {fileID: 3058491412184612779}
+  FrontLeft_TireRoot: {fileID: 6238588697467164308}
+  BackRight_TireRoot: {fileID: 7658940216034581129}
+  BackLeft_TireRoot: {fileID: 2171637326757198146}
+  ItemRoot: {fileID: 4432490842673735014}
+--- !u!4 &1094522394804284760 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8345ea43ed6506d4a9e1635f54939883, type: 3}
+  m_PrefabInstance: {fileID: 628884559734868659}
+  m_PrefabAsset: {fileID: 0}

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -6,10 +7,20 @@ using UnityEngine.SceneManagement;
 //プレイヤーのパーツ管理
 public class PartsContainer : CarComponent
 {
+    //デフォルト設定
+    //public string BodyPrefabName = "car_1";
+    //public string MainspringPrefabName = "Mainspring1";
+    //public string TirePrefabName = "Normal_Tire";
+
     public string BodyPrefabName = "Car_body1";
     public string MainspringPrefabName = "Car_Zenmai1";
     public string FrontWheelPrefabName = "Car_Tire1";
     public string BackWheelPrefabName = "Car_Tire1";
+    public string ItemPrefabName = null;
+
+    //public List<Transform> Installation_Location_Body = new List<Transform>();
+    //public List<Transform> Installation_Location_MainSpring = new List<Transform>();
+    //public List<Transform> Installation_Location_Tire = new List<Transform>();
 
     public Transform Installation_Location_Body;
     [SerializeField] Transform Installation_Location_MainSpring;
@@ -17,6 +28,7 @@ public class PartsContainer : CarComponent
     public Transform Installation_Location_Wheel_BackLeft;
     public Transform Installation_Location_Wheel_FrontRight;
     public Transform Installation_Location_Wheel_BackRight;
+    public Transform Installation_Location_Item;
 
     private void Awake()
     {
@@ -38,6 +50,21 @@ public class PartsContainer : CarComponent
 
     void Start()
     {
+
+
+        //Playerがセットされたら、プレイデータからパーツ更新
+        //if (PlayerDataManager.Instance.CustomizeList != null)
+        //{
+        //    BodyPrefabName = PartsDataManager.Instance.Get_PartsID(PlayerDataManager.Instance.CustomizeList[0]);
+        //    MainspringPrefabName = PartsDataManager.Instance.Get_PartsID(PlayerDataManager.Instance.CustomizeList[1]);
+        //    TirePrefabName = PartsDataManager.Instance.Get_PartsID(PlayerDataManager.Instance.CustomizeList[2]);
+        //}
+
+        ////Aをi番目の場所に配置(パーツタイプは自動判別)
+        //PartsArrangement(BodyPrefabName, Installation_Location_Body[0]);
+        //PartsArrangement(MainspringPrefabName, Installation_Location_MainSpring[0]);
+        //PartsArrangement(TirePrefabName, Installation_Location_Tire[0]);
+        //PartsArrangement(TirePrefabName, Installation_Location_Tire[1]);
     }
 
     public void PartsArrangement(string PartsName, Transform Installation_Location)
@@ -55,20 +82,23 @@ public class PartsContainer : CarComponent
         childObject.transform.localPosition = new Vector3(0, 0, 0);
         //childObject.transform.localRotation = Quaternion.identity;
         childObject.transform.localScale = new Vector3(1, 1, 1);
-
     }
 
-    //パーツ名更新とプリハブ更新
+    //パーツ名更新とPrefab更新
     public void UpdateBodyParts(string PartsName)
     {
         BodyPrefabName = PartsName;
         Destroy(Installation_Location_Body.GetChild(0).gameObject);
-        PartsArrangement(BodyPrefabName, Installation_Location_Body);
+        //コルーチンで1フレーム後にボディの新規作成＋Rootの設定
+        StartCoroutine(NewBodySet());
+
     }
+    //タイヤパーツを更新
     public void UpdateTireParts(string PartsName)
     {
         FrontWheelPrefabName = PartsName;
         BackWheelPrefabName = PartsName;
+        //すでにパーツがあれば削除
         if (Installation_Location_Wheel_FrontLeft.childCount != 0)
         {
             Destroy(Installation_Location_Wheel_FrontLeft.GetChild(0).gameObject);
@@ -82,10 +112,12 @@ public class PartsContainer : CarComponent
         PartsArrangement(BackWheelPrefabName, Installation_Location_Wheel_BackLeft);
         PartsArrangement(BackWheelPrefabName, Installation_Location_Wheel_BackRight);
     }
+    //ゼンマイパーツを更新
     public void UpdateMainSpringParts(string PartsName)
     {
         Debug.Log(Installation_Location_MainSpring);
         MainspringPrefabName = PartsName;
+        //すでにパーツがあれば削除
         if (Installation_Location_MainSpring.childCount != 0)
         {
             Destroy(Installation_Location_MainSpring.GetChild(0).gameObject);
@@ -93,6 +125,18 @@ public class PartsContainer : CarComponent
 
         PartsArrangement(MainspringPrefabName, Installation_Location_MainSpring);
     }
+    //アイテムパーツの更新
+    public void UpdateItemParts(string PartsName)
+    {
+        ItemPrefabName = PartsName;
+        //すでにパーツがあれば削除
+        if (Installation_Location_Item.childCount != 0)
+        {
+            Destroy(Installation_Location_Item.GetChild(0).gameObject);
+        }
+        PartsArrangement(ItemPrefabName, Installation_Location_Item);
+    }
+
     //初期化パーツ
     public void InitialSettingsParts(string Body, string Wheel, string Mainspring)
     {
@@ -100,5 +144,26 @@ public class PartsContainer : CarComponent
         FrontWheelPrefabName = Wheel;
         BackWheelPrefabName = Wheel;
         MainspringPrefabName = Mainspring;
+    }
+
+
+    public void RootMove()
+    {
+        Installation_Location_MainSpring.position = Installation_Location_Body.GetChild(0).GetComponent<PartRoot>().GetZenmaiRoot.position;
+        Installation_Location_Wheel_FrontRight.position = Installation_Location_Body.GetChild(0).GetComponent<PartRoot>().GetFrontRight_TireRoot.position;
+        Installation_Location_Wheel_FrontLeft.position = Installation_Location_Body.GetChild(0).GetComponent<PartRoot>().GetFrontLeft_TireRoot.position;
+        Installation_Location_Wheel_BackRight.position = Installation_Location_Body.GetChild(0).GetComponent<PartRoot>().GetBackRight_TireRoot.position;
+        Installation_Location_Wheel_BackLeft.position = Installation_Location_Body.GetChild(0).GetComponent<PartRoot>().GetBackLeft_TireRoot.position;
+        Installation_Location_Item.position = Installation_Location_Body.GetChild(0).GetComponent<PartRoot>().GetItemRoot.position;
+    }
+
+
+    // コルーチン本体
+    private IEnumerator NewBodySet()
+    {
+        // 次フレームで実行
+        yield return null;
+        PartsArrangement(BodyPrefabName, Installation_Location_Body);
+        RootMove();
     }
 }
