@@ -10,6 +10,8 @@ public class ResourceManager : MonoBehaviour
     public GameObject[] carPrefab;
     public Texture2D[] texture2Ds;
     public GameObject CameraPrefab;
+    public GameObject[] TrackPrefab;
+    public TrackDefinition[] TrackDefs;
 
     private void Start()
     {

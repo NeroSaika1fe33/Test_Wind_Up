@@ -9,7 +9,9 @@ public class GameManager : MonoBehaviour
 
     private CinemachineCamera cam;       //カメラ制御のため
 
-    private Track CurrentTrack;          //トラックの設定
+    public Track CurrentTrack;
+
+    public int TrackID;          //トラックの設定
 
     //一名プレイ仮定
     private int playerNum = 1;
@@ -23,11 +25,8 @@ public class GameManager : MonoBehaviour
 
     public void InitPlayerInGame()
     {
-        //Track設定
-        CurrentTrack = new SampleTrack();//(仮定)
-
         //プリハブ初期化
-        var car = Instantiate(ResourceManager.Instance.carPrefab[0], new Vector3(60f, 55f, -150f), Quaternion.identity);
+        var car = Instantiate(ResourceManager.Instance.carPrefab[0], CurrentTrack.startLinePos[0].position, Quaternion.identity);
 
         //Hudの初期化
         var tempEntity = car.GetComponent<CarEntity>();
@@ -41,6 +40,22 @@ public class GameManager : MonoBehaviour
         cam.LookAt = car.transform;
     }
 
+    public void SetCurrentTrack(Track _track)
+    {
+        CurrentTrack = _track;
+    }
+
+    public void SetCurrentTrackByID(int _Trackid)
+    {
+        TrackID = _Trackid;
+    }
+
+    public void InitCurrentTrack()
+    {
+        //var Track = Instantiate(ResourceManager.Instance.TrackPrefab[TrackID], new Vector3(0f, 0f, 0f), Quaternion.identity);
+        var Track = Instantiate(ResourceManager.Instance.TrackPrefab[0], new Vector3(0f, 0f, 0f), Quaternion.identity);
+    }
+
     public void InitResult()
     {
     }
@@ -48,4 +63,5 @@ public class GameManager : MonoBehaviour
     public void InitRanking()
     {
     }
+
 }

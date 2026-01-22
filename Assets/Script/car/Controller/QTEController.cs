@@ -172,12 +172,12 @@ public class QTEController : CarComponent
             if (Controller != null)
                 Controller.OnStartQTEFail();
             RaceController.start_count();
+
         }
         else
         {
-
-            if (Controller != null && !Controller.canControl)
-                Controller.canControl = true;
+            //if (Controller != null && !Controller.canControl)
+            //    Controller.canControl = true;
         }
     }
 }

@@ -10,12 +10,15 @@ public class CarRaceController : CarComponent
 
     [Header("Checkpoint")]
     private int CheckpointIndex { get; set; } = -1;
-
+    private Transform CurrentTransform;
     private GoalTime GoalTime { get; set; }
+
+    private CarController Controller => car.Controller;
 
     private void Start()
     {
         GoalTime = new GoalTime();
+        CurrentTransform = GetComponent<Transform>();
     }
 
     private void Update()
@@ -107,19 +110,15 @@ public class CarRaceController : CarComponent
         {
             CheckpointIndex++;
         }
+        Debug.Log("CheckPointId: " + CheckpointIndex);
     }
 
-    //未使用
-    //public short Get_Goal_Time_m()
-    //{
-    //    return _GoalTime.m;
-    //}
-    //public short Get_Goal_Time_s()
-    //{
-    //    return _GoalTime.s;
-    //}
-    //public short Get_Goal_Time_ms()
-    //{
-    //    return _GoalTime.ms;
-    //}
+    //車はチェックポイントにリセットされる
+    public void ResetToCheckPoint()
+    {
+        CurrentTransform.position = GameManager.Instance.CurrentTrack.checkpoints[CheckpointIndex].transform.position;
+        //現在のスビートを0にする
+        car.Rigidbody.linearVelocity =Vector3.zero;
+        //CurrentTransform.rotation = GameManager.Instance.CurrentTrack.checkpoints[CheckpointIndex].transform.rotation;
+    }
 }

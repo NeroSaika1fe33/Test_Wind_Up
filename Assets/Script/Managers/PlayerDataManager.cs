@@ -14,7 +14,7 @@ public class PlayerDataManager : MonoBehaviour
     private string abilityName = "None";
     public string result { get; private set; }
 
-    //シーンSelectionUIのカスタマイズ情報をここに保存
+    //シーンCarSelectionUIのカスタマイズ情報をここに保存
     public string[] CustomizeList { get; private set; } = { "車1", "ゼンマイ1", "タイヤ1" };//デフォルト設定
 
     private PlayerStats playerStats { get; set; }

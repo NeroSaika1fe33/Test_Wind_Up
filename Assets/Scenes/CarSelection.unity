@@ -687,7 +687,23 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1559003398}
     m_Modifications:
+    - target: {fileID: -6146883935090438086, guid: 22dc7dfaff834a04092c8c7337d3f87a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4219455795802306977, guid: 22dc7dfaff834a04092c8c7337d3f87a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2912374423014853506, guid: 22dc7dfaff834a04092c8c7337d3f87a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -2469539948455505581, guid: 22dc7dfaff834a04092c8c7337d3f87a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2453386107156565033, guid: 22dc7dfaff834a04092c8c7337d3f87a, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
@@ -723,7 +739,15 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5052198639686697121, guid: 22dc7dfaff834a04092c8c7337d3f87a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5282313393207014816, guid: 22dc7dfaff834a04092c8c7337d3f87a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5537242705739726882, guid: 22dc7dfaff834a04092c8c7337d3f87a, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
@@ -782,6 +806,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 765880531328942072, guid: 22dc7dfaff834a04092c8c7337d3f87a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 658677116}
+    - targetCorrespondingSourceObject: {fileID: 765880531328942072, guid: 22dc7dfaff834a04092c8c7337d3f87a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 658677115}
   m_SourcePrefab: {fileID: 100100000, guid: 22dc7dfaff834a04092c8c7337d3f87a, type: 3}
 --- !u!4 &658677111 stripped
 Transform:
@@ -810,11 +837,31 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 658677110}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 658677113}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e592fe46c3fa26144b457b07ddb6e0de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarGroundChecker
+--- !u!114 &658677115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 658677113}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eebbd1c8707dd34c9cd0f70595ffcfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CarXYZ
+  ground: {fileID: 658677114}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  rayDistance: 2
+  uprightTorque: 40
+  angularDamping: 6
+  alignToGroundNormal: 1
 --- !u!114 &658677116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -822,13 +869,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 658677113}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a959a5d191b07fe4f82ec58f4e7474c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarGroundDown
   ground: {fileID: 658677114}
-  baseDownforce: 10000
+  baseDownforce: 2500
   speedDownforce: 3
   coyoteTime: 0.12
   maxUpVelocity: 0.5

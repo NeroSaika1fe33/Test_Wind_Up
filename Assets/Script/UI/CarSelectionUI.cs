@@ -6,7 +6,7 @@ using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class CarSelectionUI : MonoBehaviour
+public class SelectionUI : MonoBehaviour
 {
     public CarEntity car;//ŽÔ‚Ì“ü—Í‚½‚ß
 
