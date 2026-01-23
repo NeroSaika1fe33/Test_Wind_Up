@@ -6,9 +6,9 @@
         "ゼンマイ1",
         "タイヤ1"
     ],
-    "maxSpeed": 90.0,
+    "maxSpeed": 130.0,
     "acceleration": 90.0,
     "weight": 140.0,
     "abilityName": "None",
-    "result": "0:3:957"
+    "result": "1:67:944"
 }
