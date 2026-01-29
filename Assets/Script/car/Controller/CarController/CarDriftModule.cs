@@ -11,7 +11,7 @@ public class CarDriftModule : CarComponent
     private enum DriftState { None, Preparing, Drifting, Cooldown }
 
     [Header("Drift")]
-    [SerializeField] private KeyCode driftKey = KeyCode.E;
+    [SerializeField] private KeyCode driftKey = KeyCode.Space;
     [SerializeField] private float driftMinSpeed = 30f;
 
     [SerializeField] private float prepareTime = 0.5f;

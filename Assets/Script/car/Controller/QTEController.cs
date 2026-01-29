@@ -93,7 +93,7 @@ public class QTEController : CarComponent
         if (Hud.QTEPanel != null)
             Hud.QTEPanel.SetActive(true);
 
-        if (Hud.InfoText != null) Hud.InfoText.text = "A D Key Press repeatedly!";
+        if (Hud.InfoText != null) Hud.InfoText.text = "A DÉLÅ[ÇòAë≈ÇµÇÊÇ§!";
 
         if (isStartGameQTE && Hud.timerText != null)
         {
