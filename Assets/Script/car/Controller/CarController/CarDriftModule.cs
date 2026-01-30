@@ -1,6 +1,5 @@
 using UnityEngine;
 using System;
-using UnityEngine.InputSystem;
 
 // Drift：drift 状態、倍率/boost 発動
 public class CarDriftModule : CarComponent
@@ -12,11 +11,7 @@ public class CarDriftModule : CarComponent
     private enum DriftState { None, Preparing, Drifting, Cooldown }
 
     [Header("Drift")]
-    [SerializeField] private KeyCode driftKey = KeyCode.Space;
-
-    [SerializeField] private bool enableGamepadDrift = true; //パット
-
-
+    [SerializeField] private KeyCode driftKey = KeyCode.E;
     [SerializeField] private float driftMinSpeed = 30f;
 
     [SerializeField] private float prepareTime = 0.5f;
@@ -53,7 +48,7 @@ public class CarDriftModule : CarComponent
         float speed = Rigidbody.linearVelocity.magnitude;
         bool isAccelerating = inputV > 0.1f;
         bool isTurning = Mathf.Abs(inputH) > 0.1f;
-        bool pressed = Input.GetKeyDown(driftKey) || GamepadDriftPressed(); ;
+        bool pressed = Input.GetKeyDown(driftKey);
 
         if (speed >= driftMinSpeed && isAccelerating && isTurning && pressed)
         {
@@ -63,18 +58,6 @@ public class CarDriftModule : CarComponent
             CarAudio?.StartDriftCharge();
         }
     }
-
-    private bool GamepadDriftPressed()
-    {
-        if (!enableGamepadDrift) return false;
-        var g = Gamepad.current;
-        if (g == null) return false;
-
-        //R1/L1=ドリフト
-        return g.rightShoulder.wasPressedThisFrame
-            || g.leftShoulder.wasPressedThisFrame; 
-    }
-
 
     public void TickStateMachine()//drift状態機
     {

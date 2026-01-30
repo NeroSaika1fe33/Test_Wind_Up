@@ -2051,8 +2051,6 @@ MonoBehaviour:
   - {fileID: 185763845}
   - {fileID: 1995932053}
   - {fileID: 1313003301}
-  stickThreshold: 0.5
-  navCooldown: 0.15
 --- !u!114 &2002012565
 MonoBehaviour:
   m_ObjectHideFlags: 0

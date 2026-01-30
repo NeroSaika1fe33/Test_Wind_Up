@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
-using UnityEngine.InputSystem;
-public class CarSelectionUI : MonoBehaviour
-{   
+using UnityEngine.UI;
+
+public class SelectionUI : MonoBehaviour
+{
     public CarEntity car;//車の入力ため
 
     [Header("PartsText")]
@@ -19,15 +19,11 @@ public class CarSelectionUI : MonoBehaviour
     public TextMeshProUGUI[] dataTexts;
 
     [Header("StatsData")]
+
     private string[] statsName = { "MaxSpeed", "Accerleration", "Weight" };
 
     [Header("Input")]
     private bool updateSignal = false;  //true:入力がある　false:入力がない
-
-    [Header("Gamepad/Stick")]
-    [SerializeField] private float stickThreshold = 0.5f;
-    [SerializeField] private float navCooldown = 0.15f;
-    private float nextNavTime = 0f;
 
     [Header("Item Selection")]
     private string[] categories = { "Body", "Mainspring", "Tire" };
@@ -69,7 +65,7 @@ public class CarSelectionUI : MonoBehaviour
             partTexts[i].text = $"{prefix}{categories[i]}:   \n{itemName}";
 
             if (i == currentRow) partTexts[i].color = Color.yellow;
-            partTexts[i].color = (i == currentRow) ? Color.yellow : Color.white;
+            else partTexts[i].color = Color.white;
         }
     }
     void Update()
@@ -78,24 +74,20 @@ public class CarSelectionUI : MonoBehaviour
         bool selectionChanged = false;
 
         //メニュー制御
-        Vector2Int dir = ReadNavigateOnce();
-
-        // 上下 row
-        if (dir.y > 0)
+        if (Input.GetKeyDown(KeyCode.W))
         {
             currentRow = (currentRow - 1 + 3) % 3;
             updateSignal = true;
             selectionChanged = true;
         }
-        else if (dir.y < 0)
+        if (Input.GetKeyDown(KeyCode.S))
         {
             currentRow = (currentRow + 1) % 3;
             updateSignal = true;
             selectionChanged = true;
         }
 
-        // 左右 item
-        if (dir.x < 0)
+        if (Input.GetKeyDown(KeyCode.A))
         {
             selected[currentRow]--;
             if (selected[currentRow] < 0)
@@ -103,7 +95,8 @@ public class CarSelectionUI : MonoBehaviour
             updateSignal = true;
             selectionChanged = true;
         }
-        else if (dir.x > 0)
+
+        if (Input.GetKeyDown(KeyCode.D))
         {
             selected[currentRow]++;
             if (selected[currentRow] >= items[currentRow].Count)
@@ -112,22 +105,19 @@ public class CarSelectionUI : MonoBehaviour
             selectionChanged = true;
         }
 
-        //変更あったら UI + 車件更新
+        //入力したら更新処理
         if (selectionChanged)
         {
             UpdatePartsUI();
             UpdateCarInCurrentRow();
         }
 
-        // 確認（Enter / パット A）
-        if (SubmitPressed())
+        //選択確認し、カスタマイズ情報保存
+        if (Input.GetKeyDown(KeyCode.Return))
         {
+            //シングルトンのプレイデータと共に保存
             if (PlayerDataManager.Instance.CustomizeList != null)
-                PlayerDataManager.Instance.DataStorage(
-                    items[0][selected[0]],
-                    items[1][selected[1]],
-                    items[2][selected[2]]
-                );
+                PlayerDataManager.Instance.DataStorage(items[0][selected[0]], items[1][selected[1]], items[2][selected[2]]);
         }
     }
     //ステータス部分の更新
@@ -174,7 +164,6 @@ public class CarSelectionUI : MonoBehaviour
                 PartsContainer.UpdateTireParts(partID);
                 break;
         }
-        updateSignal = false;
     }
 
     //パーツデータをPartsDataManagerマネジャーから取得
@@ -201,60 +190,5 @@ public class CarSelectionUI : MonoBehaviour
     public void InitCar(CarEntity _car)
     {
         car = _car;
-    }
-
-    // ===== Input Helpers (Keyboard + Gamepad) =====
-
-    private Vector2Int ReadNavigateOnce()
-    {
-        float now = Time.unscaledTime;
-        if (now < nextNavTime) return Vector2Int.zero;
-
-        int x = 0, y = 0;
-
-        // Keyboard
-        if (Keyboard.current != null)
-        {
-            if (Keyboard.current.wKey.wasPressedThisFrame || Keyboard.current.upArrowKey.wasPressedThisFrame) y = +1;
-            else if (Keyboard.current.sKey.wasPressedThisFrame || Keyboard.current.downArrowKey.wasPressedThisFrame) y = -1;
-
-            if (Keyboard.current.aKey.wasPressedThisFrame || Keyboard.current.leftArrowKey.wasPressedThisFrame) x = -1;
-            else if (Keyboard.current.dKey.wasPressedThisFrame || Keyboard.current.rightArrowKey.wasPressedThisFrame) x = +1;
-        }
-
-        // Gamepad（Dpad 優先的，次 Stick）
-        var g = Gamepad.current;
-        if (g != null && x == 0 && y == 0)
-        {
-            if (g.dpad.up.wasPressedThisFrame) y = +1;
-            else if (g.dpad.down.wasPressedThisFrame) y = -1;
-            else if (g.dpad.left.wasPressedThisFrame) x = -1;
-            else if (g.dpad.right.wasPressedThisFrame) x = +1;
-            else
-            {
-                Vector2 stick = g.leftStick.ReadValue();
-                if (stick.y >= stickThreshold) y = +1;
-                else if (stick.y <= -stickThreshold) y = -1;
-                else if (stick.x <= -stickThreshold) x = -1;
-                else if (stick.x >= stickThreshold) x = +1;
-            }
-        }
-
-        if (x != 0 || y != 0) nextNavTime = now + navCooldown;
-        return new Vector2Int(x, y);
-    }
-
-    private bool SubmitPressed()
-    {
-        bool kb = Keyboard.current != null &&
-                  (Keyboard.current.enterKey.wasPressedThisFrame ||
-                   Keyboard.current.numpadEnterKey.wasPressedThisFrame);
-
-        bool pad = false;
-        var g = Gamepad.current;
-        if (g != null)
-            pad = g.buttonSouth.wasPressedThisFrame || g.buttonEast.wasPressedThisFrame || g.startButton.wasPressedThisFrame;
-
-        return kb || pad;
     }
 }

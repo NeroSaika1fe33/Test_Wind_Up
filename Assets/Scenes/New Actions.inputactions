@@ -28,6 +28,17 @@
             "bindings": [
                 {
                     "name": "",
+                    "id": "5e4ce729-3596-4fbb-961f-c504ace5477f",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Steer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "19745ec2-b435-4a39-a336-1987e3f8b63e",
                     "path": "<Keyboard>/d",
                     "interactions": "",
@@ -39,19 +50,8 @@
                 },
                 {
                     "name": "",
-                    "id": "662e6534-f72e-483f-b96b-6f06da759203",
-                    "path": "<Keyboard>/a",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Steer",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "56ccbf3d-9c30-423d-a5f1-efa0f0fb85ea",
-                    "path": "<Keyboard>/space",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

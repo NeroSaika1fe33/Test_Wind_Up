@@ -317,8 +317,8 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_SelectedColor: {r: 0.8666667, g: 0.8627451, b: 0.47058824, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -965,7 +965,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.8666667, g: 0.8627451, b: 0.47058824, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1219,7 +1219,7 @@ MonoBehaviour:
   - pageImage: {fileID: 21300000, guid: 2ae31e3a15e47ab46932f8ec788f0bc7, type: 3}
     lines:
     - "\u6700\u5F8C\u306F\u30C9\u30EA\u30D5\u30C8\uFF01"
-    - "\u30B9\u30D4\u30FC\u30C9\u304C\u901F\u304F\u306A\u3063\u3066\u304D\u305F\u3089\u3001\u3010\u66F2\u304C\u308A\u305F\u3044\u65B9\u5411\u3011+\u3010Space\u30AD\u30FC\u3011\u3092\u62BC\u3059\u3068\u3001\u3001\u3001"
+    - "\u30B9\u30D4\u30FC\u30C9\u304C\u901F\u304F\u306A\u3063\u3066\u304D\u305F\u3089\u3001\u3010\u66F2\u304C\u308A\u305F\u3044\u65B9\u5411\u3011+\u3010E\u3011\u3092\u62BC\u3059\u3068\u3001\u3001\u3001"
     - "\u30C9\u30EA\u30D5\u30C8\u304C\u3067\u304D\u308B\u3093\u3060\uFF01\uFF01\uFF01"
   - pageImage: {fileID: 21300000, guid: 3fe48523a3c034c4fb2c24871b262c51, type: 3}
     lines:
@@ -1240,14 +1240,6 @@ MonoBehaviour:
   tutorialDoneKey: TutorialDone
   markDoneWhenFinished: 1
   endChoicePanel: {fileID: 731278592}
-  backToTitleButton: {fileID: 298313253}
-  goToInGameButton: {fileID: 981129966}
-  left1: 97
-  left2: 276
-  right1: 100
-  right2: 275
-  submit1: 13
-  submit2: 32
 --- !u!1 &1600119136
 GameObject:
   m_ObjectHideFlags: 0
@@ -1765,14 +1757,6 @@ MonoBehaviour:
   tutorialDoneKey: TutorialDone
   markDoneWhenFinished: 1
   endChoicePanel: {fileID: 0}
-  backToTitleButton: {fileID: 0}
-  goToInGameButton: {fileID: 0}
-  left1: 97
-  left2: 276
-  right1: 100
-  right2: 275
-  submit1: 13
-  submit2: 32
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

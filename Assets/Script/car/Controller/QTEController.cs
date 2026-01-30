@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
 
@@ -19,17 +17,6 @@ public class QTEController : CarComponent
     float timer = 0f;            // 残り時間
     float prevStickX = 0f;      //ゲームパッド対応
 
-    [Header("Gamepad Spin (Add-on)")]
-    [SerializeField] private bool enableSpin = true;
-    [SerializeField] private bool useRightStick = false; // false=左スティック
-    [SerializeField] private float stickDeadzone = 0.35f;
-    [SerializeField] private float degreesPerHit = 45f;  // 45度=1 hit（1周約8hit）
-    [SerializeField] private bool requireConsistentSpin = false;
-
-    private float _lastAngle;
-    private bool _hasLastAngle;
-    private float _accumDegrees;
-    private int _lastSpinSign;
     //読みやすくするため
     private CarController Controller => car.Controller;
     private PlayerStats PlayerStats => car.PlayerStats;
@@ -40,8 +27,6 @@ public class QTEController : CarComponent
     {
         // 実行中でなければ何もしない
         if (!isRunning) return;
-
-        Debug.Log(isRunning);
         // 残り時間を減らす
         timer -= Time.deltaTime;
 
@@ -79,27 +64,13 @@ public class QTEController : CarComponent
             return;
         }
 
-        // 追加：ゲームパッド「スティック回転」で連打扱い
-        int spinHits = SpinHitsThisFrame();
-        if (spinHits > 0)
-        {
-            currentCount += spinHits;
-            UpdateUI();
-
-            if (currentCount >= targetCount)
-            {
-                Success();
-                return;
-            }
-        }
-
         // A/Dキー押下でカウント
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
         {
             currentCount++;
             UpdateUI();
 
-            //目標達成で即成功
+            // 目標達成で即成功
             if (currentCount >= targetCount)
             {
                 Success();  
@@ -122,7 +93,7 @@ public class QTEController : CarComponent
         if (Hud.QTEPanel != null)
             Hud.QTEPanel.SetActive(true);
 
-        if (Hud.InfoText != null) Hud.InfoText.text = "A Dキーを連打しよう!";
+        if (Hud.InfoText != null) Hud.InfoText.text = "A D Key Press repeatedly!";
 
         if (isStartGameQTE && Hud.timerText != null)
         {
@@ -208,72 +179,5 @@ public class QTEController : CarComponent
             //if (Controller != null && !Controller.canControl)
             //    Controller.canControl = true;
         }
-    }
-    // =========================
-    // ? Gamepad Spin Detection
-    // =========================
-    private int SpinHitsThisFrame()
-    {
-        if (!enableSpin) return 0;
-
-        var g = Gamepad.current;
-        if (g == null)
-        {
-            ResetSpinState();
-            return 0;
-        }
-
-        Vector2 v = useRightStick ? g.rightStick.ReadValue() : g.leftStick.ReadValue();
-
-       
-        if (v.magnitude < stickDeadzone)
-        {
-            ResetSpinState();
-            return 0;
-        }
-
-        float angle = Mathf.Atan2(v.y, v.x) * Mathf.Rad2Deg; // -180 ~ 180
-
-        if (!_hasLastAngle)
-        {
-            _hasLastAngle = true;
-            _lastAngle = angle;
-            _accumDegrees = 0f;
-            _lastSpinSign = 0;
-            return 0;
-        }
-
-        float delta = Mathf.DeltaAngle(_lastAngle, angle);
-        _lastAngle = angle;
-
-        int sign = delta > 0 ? +1 : (delta < 0 ? -1 : 0);
-
-        if (requireConsistentSpin)
-        {
-            if (sign != 0 && _lastSpinSign != 0 && sign != _lastSpinSign)
-            {
-                //必ず統一方向回す
-                _accumDegrees = 0f;
-            }
-        }
-        if (sign != 0) _lastSpinSign = sign;
-
-        _accumDegrees += Mathf.Abs(delta);
-
-        int hits = 0;
-        while (_accumDegrees >= degreesPerHit)
-        {
-            _accumDegrees -= degreesPerHit;
-            hits++;
-        }
-
-        return hits;
-    }
-
-    private void ResetSpinState()
-    {
-        _hasLastAngle = false;
-        _accumDegrees = 0f;
-        _lastSpinSign = 0;
     }
 }
