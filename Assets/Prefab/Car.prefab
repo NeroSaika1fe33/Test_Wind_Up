@@ -388,7 +388,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3470a19a1e94d25458d32bc8cd25e249, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarDriftModule
-  driftKey: 32
+  driftKey: 101
   enableGamepadDrift: 1
   driftMinSpeed: 30
   prepareTime: 2
