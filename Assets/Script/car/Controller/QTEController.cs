@@ -40,6 +40,8 @@ public class QTEController : CarComponent
     {
         // Às’†‚Å‚È‚¯‚ê‚Î‰½‚à‚µ‚È‚¢
         if (!isRunning) return;
+
+        Debug.Log(isRunning);
         // c‚èŠÔ‚ğŒ¸‚ç‚·
         timer -= Time.deltaTime;
 

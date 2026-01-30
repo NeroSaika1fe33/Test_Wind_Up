@@ -2038,7 +2038,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2002012563}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb5200ff76547454187f42f17d806fcc, type: 3}
+  m_Script: {fileID: 11500000, guid: 1e2db093d30f5db40bb33a53a4fe3c58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SelectionUI
   car: {fileID: 658677112}
