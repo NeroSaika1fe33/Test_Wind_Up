@@ -62,7 +62,15 @@ public class CarLocomotion : CarComponent
         if (grounded && currentSpeed < currentMax)
         {
             Rigidbody.AddForce(transform.forward * inputV * accel , ForceMode.Acceleration);
+
+            if (Rigidbody.IsSleeping())
+            {
+                Rigidbody.WakeUp();
+            }
         }
+
+        Debug.Log(transform.forward * inputV * accel);
+
         //‘¬“x§ŒÀ  
         Vector3 v = Rigidbody.linearVelocity;
         float speed = v.magnitude;
