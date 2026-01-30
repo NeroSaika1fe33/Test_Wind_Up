@@ -28,8 +28,8 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "5e4ce729-3596-4fbb-961f-c504ace5477f",
-                    "path": "<Keyboard>/a",
+                    "id": "19745ec2-b435-4a39-a336-1987e3f8b63e",
+                    "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -39,8 +39,8 @@
                 },
                 {
                     "name": "",
-                    "id": "19745ec2-b435-4a39-a336-1987e3f8b63e",
-                    "path": "<Keyboard>/d",
+                    "id": "662e6534-f72e-483f-b96b-6f06da759203",
+                    "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

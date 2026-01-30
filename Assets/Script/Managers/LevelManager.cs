@@ -2,6 +2,8 @@ using System;
 using System.Resources;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 
 public enum SceneList : int
 {
@@ -63,6 +65,9 @@ public class LevelManager : MonoBehaviour
             case SceneList.Track_Selection:
                 Debug.Log("TrackSelection Ç©ÇÁó£íE");
                 break;
+            case SceneList.Tutorial:
+                Debug.Log("Tutorial Ç©ÇÁó£íE");
+                break;
         }
     }
 
@@ -91,6 +96,9 @@ public class LevelManager : MonoBehaviour
                 break;
             case SceneList.Track_Selection:
                 Debug.Log("TrackSelectionÇ…ì¸ÇΩ");
+                break;
+            case SceneList.Tutorial:
+                Debug.Log("TutorialÇ…ì¸ÇΩ");
                 break;
         }
     }
@@ -133,17 +141,19 @@ public class LevelManager : MonoBehaviour
     {
 
         //ÉVÅ[ÉìëJà⁄ëÄçÏ
-        if (Input.GetKeyDown(KeyCode.Return) && CurrentScene == SceneList.Track_Selection)
+        // ConfirmÅiKeyboard Enter / Gamepad buttonsÅj
+        if (SubmitPressedThisFrame() && CurrentScene == SceneList.Track_Selection)
         {
             LoadScene(SceneList.In_Game);
         }
 
-        if (Input.GetKeyDown(KeyCode.Return) && CurrentScene == SceneList.Car_Selection)
+        if (SubmitPressedThisFrame() && CurrentScene == SceneList.Car_Selection)
         {
             LoadScene(SceneList.Track_Selection);
         }
 
-        if (Input.anyKeyDown && CurrentScene == SceneList.Result)
+        
+        if (AnyKeyboardOrGamepadPressedThisFrame() && CurrentScene == SceneList.Result)
         {
             LoadScene(SceneList.Title);
             PlayerDataManager.Instance.Save();
@@ -181,5 +191,45 @@ public class LevelManager : MonoBehaviour
     public void OnClickSelect()
     {
         LoadScene(SceneList.Car_Selection);
+    }
+
+    private bool SubmitPressedThisFrame()
+    {
+        bool kb = Keyboard.current != null &&
+                  (Keyboard.current.enterKey.wasPressedThisFrame ||
+                   Keyboard.current.numpadEnterKey.wasPressedThisFrame);
+
+        var g = Gamepad.current;
+        bool pad = false;
+        if (g != null)
+        {
+            
+            pad = g.buttonSouth.wasPressedThisFrame   // Xbox A / PS Å~ / Switch B
+               || g.buttonEast.wasPressedThisFrame    // Xbox B / PS Åõ / Switch A
+               || g.startButton.wasPressedThisFrame;
+        }
+
+        return kb || pad;
+    }
+
+    private bool AnyKeyboardOrGamepadPressedThisFrame()
+    {
+        bool kbAny = Keyboard.current != null && Keyboard.current.anyKey.wasPressedThisFrame;
+
+        bool padAny = false;
+        var g = Gamepad.current;
+        if (g != null)
+        {
+            foreach (var c in g.allControls)
+            {
+                if (c is ButtonControl b && b.wasPressedThisFrame)
+                {
+                    padAny = true;
+                    break;
+                }
+            }
+        }
+
+        return kbAny || padAny;
     }
 }
