@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bd22691dd4797043941f1b7ca24eee1, type: 3}
   m_Name: Track02
   m_EditorClassIdentifier: Assembly-CSharp::TrackDefinition
-  trackName: Suusi
+  trackName: "\u73A9\u5177\u306E\u90E8\u5C4B"
   trackIcon: {fileID: 21300000, guid: 11bee31b482bc3749b30933a834ca53b, type: 3}
   trackID: 1

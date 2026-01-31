@@ -20,7 +20,7 @@ public class TrackSelectionUI : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        selectedTrackID = 2;
+        //selectedTrackID = 2;
         ApplyUI();
         TrackNameText.text = $"{ResourceManager.Instance.TrackDefs[selectedTrackID].trackName}";
     }

@@ -41,11 +41,10 @@ public class QTEController : CarComponent
         // 実行中でなければ何もしない
         if (!isRunning) return;
 
-        Debug.Log(isRunning);
         // 残り時間を減らす
         timer -= Time.deltaTime;
 
-        if(!Hud) return;
+        if (!Hud) return;
 
         //カウントダウン
         if (isStartGameQTE && Hud.timerText != null)
@@ -102,7 +101,7 @@ public class QTEController : CarComponent
             //目標達成で即成功
             if (currentCount >= targetCount)
             {
-                Success();  
+                Success();
             }
         }
     }
@@ -155,9 +154,9 @@ public class QTEController : CarComponent
             return;   // carhealth is not run
         }
 
-        
-            Controller?.SetCanControl(true);
-        
+
+        Controller?.SetCanControl(true);
+
 
         PlayerStats.ResetHp();
 
@@ -225,7 +224,7 @@ public class QTEController : CarComponent
 
         Vector2 v = useRightStick ? g.rightStick.ReadValue() : g.leftStick.ReadValue();
 
-       
+
         if (v.magnitude < stickDeadzone)
         {
             ResetSpinState();

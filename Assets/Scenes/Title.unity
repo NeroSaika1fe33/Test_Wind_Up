@@ -1848,6 +1848,8 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 3a1c691b97b052a4da0ab3293d7fa9bc, type: 3}
   CameraPrefab: {fileID: 4361702729692131642, guid: 24e46e668dd973e468860c6bb910188d, type: 3}
   TrackPrefab:
+  - {fileID: 7950529007637055896, guid: d23a51524769b3b41b82b71db2a49141, type: 3}
+  - {fileID: 2245134703150757418, guid: 67fde5f893aaf5640908537e94f372c0, type: 3}
   - {fileID: 2245134703150757418, guid: 67fde5f893aaf5640908537e94f372c0, type: 3}
   TrackDefs:
   - {fileID: 11400000, guid: ef0d2503e542a6041877fd2397a2b64e, type: 2}

@@ -68,9 +68,6 @@ public class CarLocomotion : CarComponent
                 Rigidbody.WakeUp();
             }
         }
-
-        Debug.Log(transform.forward * inputV * accel);
-
         //ë¨ìxêßå¿  
         Vector3 v = Rigidbody.linearVelocity;
         float speed = v.magnitude;

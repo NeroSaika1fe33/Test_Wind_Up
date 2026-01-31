@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
     public void InitPlayerInGame()
     {
         //ƒvƒŠƒnƒu‰Šú‰»
-        car = Instantiate(ResourceManager.Instance.carPrefab[0], CurrentTrack.startLinePos[0].position, Quaternion.identity);
+        car = Instantiate(ResourceManager.Instance.carPrefab[0], CurrentTrack.startLinePos[0].position, CurrentTrack.startLinePos[0].transform.rotation);
 
         //Hud‚Ì‰Šú‰»
         var tempEntity = car.GetComponent<CarEntity>();
@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
     public void InitCurrentTrack()
     {
         //var Track = Instantiate(ResourceManager.Instance.TrackPrefab[TrackID], new Vector3(0f, 0f, 0f), Quaternion.identity);
-        MyTrack = Instantiate(ResourceManager.Instance.TrackPrefab[0], new Vector3(0f, 0f, 0f), Quaternion.identity);
+        MyTrack = Instantiate(ResourceManager.Instance.TrackPrefab[TrackID], new Vector3(0f, 0f, 0f), Quaternion.identity);
     }
 
     public void InitResult()
