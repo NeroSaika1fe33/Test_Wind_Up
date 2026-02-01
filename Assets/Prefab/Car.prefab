@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 5537242705739726882}
   - component: {fileID: 3794945850748930621}
   - component: {fileID: 1740027094608105067}
+  - component: {fileID: 1145797130459419807}
   m_Layer: 0
   m_Name: Car
   m_TagString: Player
@@ -431,6 +432,96 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 614d6158c814f81478e271a32a92b7a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObjectContact
+--- !u!114 &1145797130459419807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765880531328942072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93adec53c155e7343b5e46482d4e3a31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::zenmai
+  rate: 3
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Zenmai_Set:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -2.0026546
+      outSlope: -2.0026546
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.2496459
+      value: 0.5000455
+      inSlope: -2.0026546
+      outSlope: 0.0015820905
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 0.5424423
+    - serializedVersion: 3
+      time: 0.499956
+      value: 0.5004415
+      inSlope: 0.0015820905
+      outSlope: -2.0019863
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.9852398
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.7499632
+      value: -0.00006950274
+      inSlope: -2.0019863
+      outSlope: 0.00027797007
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0.00027797007
+      outSlope: 0.00027797007
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  CarTransform: {fileID: 8018953700431018699}
+  car: {fileID: -5860910932433380016}
 --- !u!1 &1116719818426671010
 GameObject:
   m_ObjectHideFlags: 0
