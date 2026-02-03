@@ -20,7 +20,6 @@ public class CarLocomotion : CarComponent
 
     private Rigidbody Rigidbody => car.Rigidbody;
     private PlayerStats PlayerStats => car.PlayerStats;
-
     private CarGroundChecker Ground => GetComponent<CarGroundChecker>();
     private CarDriftModule Drift => GetComponent<CarDriftModule>();
 
@@ -62,11 +61,6 @@ public class CarLocomotion : CarComponent
         if (grounded && currentSpeed < currentMax)
         {
             Rigidbody.AddForce(transform.forward * inputV * accel , ForceMode.Acceleration);
-
-            if (Rigidbody.IsSleeping())
-            {
-                Rigidbody.WakeUp();
-            }
         }
         //‘¬“x§ŒÀ  
         Vector3 v = Rigidbody.linearVelocity;
