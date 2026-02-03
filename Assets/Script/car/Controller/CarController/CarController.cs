@@ -67,17 +67,17 @@ public class CarController : CarComponent
             Audio?.StopAccel();
             Audio?.PlayCrash();
             
-
             //タイマー
             wallKnockbackTimer += Time.deltaTime;
             if (wallKnockbackTimer >= wallKnockbackLockTime)
             {
                 isWallKnockback = false;
+                wallKnockbackTimer = 0.0f;
+                car.Rigidbody.linearVelocity = new Vector3(1,1,1);
             }
             return; //HandleDriftInput動作しない場合
         }
 
-        //
         //無敵
         if (isInvincible)
         {
@@ -85,6 +85,7 @@ public class CarController : CarComponent
             if (invincibleTimer <= 0f)
             {
                 isInvincible = false;
+                isWallKnockback = false;
                 Debug.Log("Invincible end");
             }
         }
@@ -139,7 +140,7 @@ public class CarController : CarComponent
         return (wallLayer.value & (1 << obj.layer)) != 0;
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnCollisionStay(Collision collision)
     {
 
         // 壁（tag=wall）に当たった時のみ処理
