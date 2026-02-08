@@ -1,21 +1,16 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.HID;
 using UnityEngine.Windows;
 
-public class CarController : CarComponent
+public class EnemyController : EnemyComponent
 {
-    public bool canControl = true;
+    private EnemyStats EnemyStats => GetComponent<EnemyStats>();
+    private Rigidbody Rigidbody => car.Rigidbody;
+
+    public bool canControl = false;
+    private float timer = 5.0f;
     [SerializeField] private LayerMask wallLayer;
-
-
-    private CarGroundChecker Ground => GetComponent<CarGroundChecker>();
-    private CarLocomotion Locomotion => GetComponent<CarLocomotion>();
-    private CarCrashHandler Crash => GetComponent<CarCrashHandler>();
-    private QTEController QTE => car.QTEController;
-    private InGameUI Hud => car.Hud;
-    private PlayerStats Stats =>GetComponent<PlayerStats>();
-    private CarAudio Audio => GetComponent<CarAudio>();
-  
 
     [Header("Wall Knockback")]
     public string wallTag = "Wall";                     //unity tag
@@ -32,41 +27,84 @@ public class CarController : CarComponent
     public bool IsInvincible => isInvincible;
 
 
-    void Start()
+    [Header("Ground Check")]
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private float groundCheckDistance = 1.0f;
+    [SerializeField] private float slopeLimitDeg = 60f;
+
+    public bool IsGrounded { get; private set; }
+    private bool groundedFront;
+    private bool groundedBack;
+
+    public void CheckGround()
     {
-        //GameStart-> QTE 
-        canControl = false;
-        if (QTE != null) QTE.StartGameQTE(); 
-        else canControl = true;
+        var t = transform;
+        groundedFront = RayIsGround(t.position + t.forward * 0.8f);
+        groundedBack = RayIsGround(t.position - t.forward * 0.8f);
+        IsGrounded = groundedFront || groundedBack;
+    }
+
+    private bool RayIsGround(Vector3 origin)
+    {
+        Vector3 dir = -transform.up;
+        bool hit = Physics.Raycast(origin, dir, out RaycastHit info, groundCheckDistance, groundLayer, QueryTriggerInteraction.Ignore);
+
+        Debug.DrawRay(origin, dir * groundCheckDistance, hit ? Color.green : Color.red);
+
+        if (!hit) return false;
+
+        float angle = Vector3.Angle(info.normal, Vector3.up);
+        return angle <= slopeLimitDeg;
     }
 
     void Update()
     {
-        if (!canControl) return;
+        const float KMH_TO_MS = 1f / 3.6f;
 
-        //QTE UI開けたらreturn 
-        bool qteShowing = (Hud != null && Hud.QTEPanel != null && Hud.QTEPanel.activeInHierarchy);
-        if (qteShowing) return;
+        float accel = EnemyStats != null ? EnemyStats.acceleration : 0f;
+        float maxSp = EnemyStats != null ? EnemyStats.maxSpeed * KMH_TO_MS : 20f * KMH_TO_MS;
+
+        // 残り時間を減らす
+        if (timer > 0f)
+            timer -= Time.deltaTime;
+
+        if (timer < 0f)
+        {
+            canControl = true;
+            Rigidbody.linearVelocity = transform.forward * 0.4f * accel;
+            timer = 0f;
+        }
+
+        if (!canControl) return;
 
         CheckGround();
 
-        //左右input
-        float steer = GetHorizontalInput();
-        Locomotion?.SetSteer(steer);
-
         // 自動前進input 更新、drift start 判定
-        Locomotion?.TickInputs(Ground != null && Ground.IsGrounded);
+        if (!IsGrounded) return;
+        bool grounded = IsGrounded;
 
-        // crash check
-        Crash?.TickCrashCheck();
+
+
+        // 前進
+        float currentSpeed = Rigidbody.linearVelocity.magnitude;
+        float currentMax = maxSp;
+
+        if (grounded && currentSpeed < currentMax)
+        {
+            Rigidbody.AddForce(transform.forward * 0.4f * accel, ForceMode.Acceleration);
+        }
+        //速度制限  
+        Vector3 v = Rigidbody.linearVelocity;
+        float speed = v.magnitude;
+        if (speed > currentMax && speed > 0.01f)
+        {
+            Rigidbody.linearVelocity = v.normalized * currentMax;
+        }
 
         //wallKnock
         // 壁ノックバック中：入力を無効化し、一定時間で解除
         if (isWallKnockback)
         {
-            Audio?.StopAccel();
-            Audio?.PlayCrash();
-            
             //タイマー
             wallKnockbackTimer += Time.deltaTime;
             if (wallKnockbackTimer >= wallKnockbackLockTime)
@@ -88,50 +126,6 @@ public class CarController : CarComponent
                 Debug.Log("Invincible end");
             }
         }
-    }
-
-   
-    public void CheckGround() => Ground?.CheckGround();
-
-    public void CarCrash() => Crash?.TriggerCrash();
-
-    public void SetCanControl(bool enabled) => canControl = enabled;
-
-    public void OnStartQTESuccess()
-    {
-        canControl = true;
-        // StartQTE Boost
-        var rb = car.Rigidbody;
-        Vector3 dir = transform.forward; dir.y = 0f; dir.Normalize();
-        rb.linearVelocity = dir * 40f;
-    }
-
-    public void OnStartQTEFail(){
-        canControl = true;
-
-        var rb = car.Rigidbody;
-        Vector3 dir = transform.forward; dir.y = 0f; dir.Normalize();
-        rb.linearVelocity = dir * 5f;
-    }
-
-    float GetHorizontalInput() //Car input
-    {
-        // Gamepad
-        if (Gamepad.current != null)
-        {
-            float h = Gamepad.current.leftStick.x.ReadValue();
-            if (Mathf.Abs(h) < 0.15f) h = 0f;
-            return Mathf.Clamp(h, -1f, 1f);
-        }
-
-        // Keyboard
-        float k = 0f;
-        if (Keyboard.current != null)
-        {
-            if (Keyboard.current.aKey.isPressed || Keyboard.current.leftArrowKey.isPressed) k -= 1f;
-            if (Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed) k += 1f;
-        }
-        return Mathf.Clamp(k, -1f, 1f);
     }
 
     bool IsWall(GameObject obj)
@@ -194,7 +188,7 @@ public class CarController : CarComponent
     //ダメージする時エフェクトや効果あったらここに
     void GetDamage()
     {
-        Stats?.TakeDamage(1);
+        //Stats?.TakeDamage(1);
         //無敵on
         isInvincible = true;
         invincibleTimer = invincibleTime;

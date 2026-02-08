@@ -4,16 +4,7 @@ using UnityEngine;
 
 public class CarEntity : CarComponent
 {
-
-    public CarCamera Camera { get; private set; }
-
-    public CarController Controller { get; private set; }
-
-    public CarInput Input { get; private set; }
-
     public CarRaceController RaceController { get; private set; }
-
-    public InGameUI Hud { get; private set; }
 
     public CarAbilityController AblityController { get; private set; }
 
@@ -21,38 +12,43 @@ public class CarEntity : CarComponent
 
     public CarSituation Situation { get; private set; }
 
-    public PartsContainer PartsContainer { get; private set; }
+    public Rigidbody Rigidbody { get; private set; }
+
+    public CarCamera Camera { get; private set; }
+
+    public CarController Controller { get; private set; }
+
+    public CarInput Input { get; private set; }
+
+    public InGameUI Hud { get; private set; }
 
     public QTEController QTEController { get; private set; }
 
+    public PlayerPartsContainer PlayerPartsContainer { get; private set; }
+
     public CarAudio CarAudio { get; private set; }
 
-    public Rigidbody Rigidbody { get; private set; }
-
     //マルチプレイのため
-    //public static readonly List<CarEntity> Cars = new List<CarEntity>();
+    //public static readonly List<Entity> Cars = new List<CarEntity>();
 
     //全部のコンポネント初期化
-    void Awake()
+    virtual protected void Awake()
     {
-        Camera = GetComponent<CarCamera>();
-        Controller = GetComponent<CarController>();
-        Input = GetComponent<CarInput>();
         RaceController = GetComponent<CarRaceController>();
         AblityController = GetComponent<CarAbilityController>();
         PlayerStats = GetComponent<PlayerStats>();
         Situation = GetComponent<CarSituation>();
-        PartsContainer = GetComponent<PartsContainer>();
-        QTEController = GetComponent<QTEController>();
         Rigidbody = GetComponent<Rigidbody>();
+        Camera = GetComponent<CarCamera>();
+        Controller = GetComponent<CarController>();
+        Input = GetComponent<CarInput>();
+        QTEController = GetComponent<QTEController>();
         CarAudio = GetComponent<CarAudio>();
+        PlayerPartsContainer = GetComponent<PlayerPartsContainer>();
     }
 
     private void Start()
     {
-
-
-
         var components = GetComponentsInChildren<CarComponent>();
         foreach (var component in components) component.Init(this);
     }

@@ -3,10 +3,14 @@ using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 //Carを再起動するためのA/D連打
 public class QTEController : CarComponent
 {
+    //イベント生成
+    public event Action OnCountdownFinished;
+
     int currentCount = 0;// 現在の連打回数
     int targetCount = 20;// 目標連打回数
 
@@ -57,6 +61,8 @@ public class QTEController : CarComponent
             }
             else
             {
+                //コントダウン終了するとイベント発生、NPCに信号発送
+                OnCountdownFinished?.Invoke();
                 Hud.timerText.text = "GO!";
             }
         }

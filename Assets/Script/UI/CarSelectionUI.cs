@@ -41,7 +41,7 @@ public class CarSelectionUI : MonoBehaviour
 
     //読みやすくするため
     private PlayerStats PlayerStats => car.PlayerStats;
-    private PartsContainer PartsContainer => car.PartsContainer;
+    private PlayerPartsContainer PartsContainer => car.PlayerPartsContainer;
 
     void Start()
     {
@@ -190,11 +190,6 @@ public class CarSelectionUI : MonoBehaviour
                 }
             }
         }
-    }
-    //データを次のシーンに持っていくためにCussomList(DDOL)に保存
-    private void OnDestroy()
-    {
-
     }
 
     //車のデータ入力ため、未使用

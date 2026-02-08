@@ -80,25 +80,12 @@ GameObject:
   - component: {fileID: 8018953700431018699}
   - component: {fileID: 3848215623913859446}
   - component: {fileID: 1813663504983589506}
-  - component: {fileID: -5860910932433380016}
-  - component: {fileID: 6870756851574069051}
-  - component: {fileID: 5282313393207014816}
-  - component: {fileID: 6046274174697150035}
-  - component: {fileID: 37188137374329518}
-  - component: {fileID: 3397547480521046830}
-  - component: {fileID: 5369880708600226067}
-  - component: {fileID: 5052198639686697121}
-  - component: {fileID: -6146883935090438086}
-  - component: {fileID: -2453386107156565033}
-  - component: {fileID: -2912374423014853506}
-  - component: {fileID: -4219455795802306977}
-  - component: {fileID: 5537242705739726882}
-  - component: {fileID: 3794945850748930621}
-  - component: {fileID: 1740027094608105067}
-  - component: {fileID: 1145797130459419807}
-  - component: {fileID: 6675245697860844731}
+  - component: {fileID: 8052197360837549667}
+  - component: {fileID: 3769358976105871410}
+  - component: {fileID: 7471932148523540549}
+  - component: {fileID: 5289977331263449237}
   m_Layer: 0
-  m_Name: Car
+  m_Name: EnemyCar
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -171,7 +158,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &-5860910932433380016
+--- !u!114 &8052197360837549667
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -180,10 +167,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 765880531328942072}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f43668e9447ff0740bf30253469de626, type: 3}
+  m_Script: {fileID: 11500000, guid: 49981e6c568c24f4ca34eb6ba251a011, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Car
---- !u!114 &6870756851574069051
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyEntity
+--- !u!114 &3769358976105871410
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -192,275 +179,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 765880531328942072}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05c12690048e0bf4fbb4a6feae02fcd4, type: 3}
+  m_Script: {fileID: 11500000, guid: 237b69b93ceef104c986bd31cf9f26b4, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::car_manager
---- !u!114 &5282313393207014816
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 765880531328942072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a9623a3f8e438e4085c775e1622b18f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::car_situation
---- !u!114 &6046274174697150035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 765880531328942072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6259865ea055bd6408a9c014b5dd9775, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CarCamera
-  drivingVP: {fileID: 121553543790606787}
---- !u!114 &37188137374329518
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 765880531328942072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f35f6195ee911254d9a21dd023e69b3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CarAbilityController
---- !u!114 &3397547480521046830
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 765880531328942072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57884a049295f624e93bca244a5f64b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
-  maxHP: 3
-  currentHP: 0
---- !u!114 &5369880708600226067
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 765880531328942072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0755b9eaabebf4443946b889be156a82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CarAudio
-  oneShotSource: {fileID: 0}
-  accelloopSource: {fileID: 0}
-  driftloopSource: {fileID: 0}
-  oneShotChargeSource: {fileID: 0}
-  crashClip: {fileID: 8300000, guid: b9e2f1cdfd225af4e92706d909695705, type: 3}
-  driftChargeLoop: {fileID: 8300000, guid: 1f63db0c58d104848a1078c06b885f5d, type: 3}
-  boostClip: {fileID: 8300000, guid: 148c5a0123f37ba4eb29a5c8ed1720f6, type: 3}
-  AccelLoop: {fileID: 8300000, guid: 01679c24f26459049a3455103a1efe30, type: 3}
-  ZenmaiLoop: {fileID: 8300000, guid: 2d6ea1de35e8cff429d58fe776ab0201, type: 3}
-  volume: 1
-  crashCooldown: 0.15
---- !u!114 &5052198639686697121
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 765880531328942072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db435c5b709f72243a4e2b8e5efbf07c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CarController
-  canControl: 1
-  wallLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  wallTag: Wall
-  wallKnockbackSpeed: 20
-  wallKnockbackUp: 2
-  wallKnockbackLockTime: 0.2
-  invincibleTime: 2
---- !u!114 &-6146883935090438086
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 765880531328942072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8bc6de3d829bf541bfdc2ad1a55e3fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::QTEController
-  startQTETime: 3
-  timeLimit: 5
-  enableSpin: 1
-  useRightStick: 0
-  stickDeadzone: 0.35
-  degreesPerHit: 45
-  requireConsistentSpin: 0
---- !u!114 &-2453386107156565033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 765880531328942072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ceaac3dceb68204580ba2ad9dd88778, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CarCrashHandler
---- !u!114 &-2912374423014853506
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 765880531328942072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c7e88831a50f7640adbb52d6441fe35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CarLocomotion
-  autoForwardInput: 0.523
-  turnSpeed: 3
-  steerSmooth: 6
-  allowAirSteer: 1
-  airTurnMultiplier: 0.35
---- !u!114 &-4219455795802306977
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 765880531328942072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e592fe46c3fa26144b457b07ddb6e0de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CarGroundChecker
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  groundCheckDistance: 1
-  slopeLimitDeg: 60
---- !u!114 &5537242705739726882
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 765880531328942072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3470a19a1e94d25458d32bc8cd25e249, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CarDriftModule
-  driftKey: 32
-  enableGamepadDrift: 1
-  driftMinSpeed: 30
-  prepareTime: 2
-  driftTime: 1.2
-  cooldownTime: 0.6
-  prepareSpeed: 0.85
-  driftSpeed: 1.5
-  cooldownSpeed: 0.9
-  driftTurnMultiplier: 1.2
---- !u!114 &3794945850748930621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 765880531328942072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 181d95ddb85744f419de8b44b24972f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CarWheelSparkVFX
-  drift: {fileID: 5537242705739726882}
-  wheelPoints:
-  - {fileID: 8250863167967034021}
-  - {fileID: 1060122740781971548}
-  - {fileID: 6987509811931398366}
-  - {fileID: 8250863167967034021}
-  chargeSparkPrefab: {fileID: 3033448107920706903, guid: 2e411634a8c0abb47985232b1e424ce5, type: 3}
-  boostSparkPrefab: {fileID: 3033448107920706903, guid: a8c37790274c1c341b108f29fe8177ad, type: 3}
-  playSeconds: 0.25
---- !u!114 &1740027094608105067
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 765880531328942072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 614d6158c814f81478e271a32a92b7a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ObjectContact
---- !u!114 &1145797130459419807
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 765880531328942072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93adec53c155e7343b5e46482d4e3a31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::zenmai
-  rate: 3
-  curve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  CarTransform: {fileID: 8018953700431018699}
-  car: {fileID: -5860910932433380016}
---- !u!114 &6675245697860844731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 765880531328942072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f875309a26a90343aaa24f2cd989ee9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PartsContainer
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyPartsContainer
   BodyPrefabName: Car_body1
   MainspringPrefabName: Car_Zenmai1
   FrontWheelPrefabName: Car_Tire1
@@ -473,6 +194,45 @@ MonoBehaviour:
   Installation_Location_Wheel_FrontRight: {fileID: 4981725212695734841}
   Installation_Location_Wheel_BackRight: {fileID: 8336202540575072014}
   Installation_Location_Item: {fileID: 74467836825099166}
+--- !u!114 &7471932148523540549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765880531328942072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1f2d070cd57b8448b9ada5bce119fd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyController
+  canControl: 0
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  wallTag: Wall
+  wallKnockbackSpeed: 20
+  wallKnockbackUp: 2
+  wallKnockbackLockTime: 0.2
+  invincibleTime: 2
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  groundCheckDistance: 1
+  slopeLimitDeg: 60
+--- !u!114 &5289977331263449237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765880531328942072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 421ec59cbda7c004cb56399d1422eb4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
+  PartsContainer: {fileID: 3769358976105871410}
 --- !u!1 &1116719818426671010
 GameObject:
   m_ObjectHideFlags: 0

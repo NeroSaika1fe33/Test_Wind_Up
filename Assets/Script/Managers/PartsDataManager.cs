@@ -86,7 +86,6 @@ public class PartsDataManager : MonoBehaviour
             }
         }
         return result;
-        ;
     }
 
     //パーツ名とデータ名に対応する情報をintで返す(数値以外は0で返す)
@@ -244,5 +243,15 @@ public class PartsDataManager : MonoBehaviour
         _Number_of_Parts = Parts_of_data;     //パーツ数を設定
     }
 
+    //ランダムなパットセット
+    public string[] GetRandomPartsArray()
+    {
+        if (_Number_of_Parts == 0) return null;
 
+        string randomBody = _PartsData_All[Random.Range(1,3)][0];
+        string randomWheel = _PartsData_All[Random.Range(4, 5)][0];
+        string randomMainspring = _PartsData_All[Random.Range(5, 6)][0];
+
+        return new string[] { randomBody, randomWheel, randomMainspring };
+    }
 }

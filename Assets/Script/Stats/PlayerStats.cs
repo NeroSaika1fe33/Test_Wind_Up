@@ -15,7 +15,7 @@ public class PlayerStats : MonoBehaviour, IStats
     public string abilityName { get; set; } = "None";
     public string result {  get; set; }
 
-    private PartsContainer Car;
+    private PlayerPartsContainer Car;
 
     public Part[] parts { get; private set; } = new Part[3];
 
@@ -37,7 +37,7 @@ public class PlayerStats : MonoBehaviour, IStats
 
     private void Awake()
     {
-        Car = GetComponentInParent<PartsContainer>();
+        Car = GetComponentInParent<PlayerPartsContainer>();
         //”z—ñ‰Šú‰»
         for (int i = 0; i < parts.Length; i++)
         {

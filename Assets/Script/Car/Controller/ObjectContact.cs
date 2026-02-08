@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class ObjectContact : MonoBehaviour
 {
-    PartsContainer _PartsContainer;
+    PlayerPartsContainer _PartsContainer;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        if(this.TryGetComponent<PartsContainer>(out var component))
+        if(this.TryGetComponent<PlayerPartsContainer>(out var component))
         {
             _PartsContainer = component;
         }

@@ -22,7 +22,6 @@ public class zenmai : MonoBehaviour
         void Init(CarEntity entity);
     }
 
-
     private void Start()
     {
         curve.preWrapMode = WrapMode.Loop;
