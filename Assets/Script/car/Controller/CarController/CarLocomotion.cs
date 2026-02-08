@@ -14,6 +14,10 @@ public class CarLocomotion : CarComponent
     [Header("Steer Smoothing")]
     [SerializeField] private float steerSmooth = 6f;
 
+    [Header("Air Control")]
+    [SerializeField] private bool allowAirSteer = true;
+    [SerializeField, Range(0f, 1f)] private float airTurnMultiplier = 0.35f;
+
     private float inputV;
     private float inputH;
     private float smoothH;
@@ -28,11 +32,12 @@ public class CarLocomotion : CarComponent
     //  CarController call：更新 inputV（自動前進）
     public void TickInputs(bool isGrounded)
     {
-        inputV = isGrounded ? autoForwardInput : 0f;
+        inputV = autoForwardInput;
         smoothH = Mathf.Lerp(smoothH, inputH, steerSmooth * Time.deltaTime);
 
         // drift 判定開始
-        Drift?.TickStartCondition(inputV, inputH);
+        if (isGrounded)
+         Drift?.TickStartCondition(inputV, inputH);
     }
 
     private void FixedUpdate()
@@ -70,9 +75,10 @@ public class CarLocomotion : CarComponent
             Rigidbody.linearVelocity = v.normalized * currentMax;
         }
         // 左右
-        if (grounded)
+        float steerMul = grounded ? 1f : (allowAirSteer ? airTurnMultiplier : 0f);
+        if (steerMul > 0f)
         {
-            float yawDegPerSec = turnSpeed * 120f * turnMul;
+            float yawDegPerSec = turnSpeed * 120f * turnMul * steerMul;
             float yawThisStep = smoothH * yawDegPerSec * Time.fixedDeltaTime;
             Rigidbody.MoveRotation(Rigidbody.rotation * Quaternion.Euler(0f, yawThisStep, 0f));
         }
