@@ -11,7 +11,7 @@ public enum Direction
 public class Angle_Judgment: MonoBehaviour
 {
     //目的地が正面か調べる(double rangeは正面とする範囲を角度で入力1～180)
-    public static bool Front_Judgment(GameObject car, Transform target, float range = 0)
+    public static bool Front_Judgment(GameObject car, Vector3 target, float range = 0)
     {
         if(range > 180) { range = 180; };
         if(range < 0) { range = 0; };
@@ -23,7 +23,7 @@ public class Angle_Judgment: MonoBehaviour
         Forward.y = 0;
 
         //targetとcarから目的地へのベクトルを生成
-        Vector3 toTarget = target.position - car.transform.position;
+        Vector3 toTarget = target - car.transform.position;
         toTarget.y = 0;
 
         //正面か計算
@@ -36,7 +36,7 @@ public class Angle_Judgment: MonoBehaviour
     }
 
     //目的地が前後どちらか調べる
-    public static Direction Forward_BackJudgment(GameObject car, Transform target)
+    public static Direction Forward_BackJudgment(GameObject car, Vector3 target)
     {
         Direction result = Direction.None;
 
@@ -45,7 +45,7 @@ public class Angle_Judgment: MonoBehaviour
         Forward.y = 0;
 
         //targetとcarから目的地へのベクトルを生成
-        Vector3 toTarget = target.position - car.transform.position;
+        Vector3 toTarget = target - car.transform.position;
         toTarget.y = 0;
         //前後判定
         float dot = Vector3.Dot(Forward.normalized, toTarget.normalized);
@@ -61,7 +61,7 @@ public class Angle_Judgment: MonoBehaviour
     }
 
     //目的地が左右どちらか調べる
-    public static Direction Left_RightJudgment(GameObject car,Transform target)
+    public static Direction Left_RightJudgment(GameObject car, Vector3 target)
     {
         Direction result = Direction.None;
 
@@ -70,7 +70,7 @@ public class Angle_Judgment: MonoBehaviour
         Forward.y = 0;
 
         //targetとcarから目的地へのベクトルを生成
-        Vector3 toTarget = target.position - car.transform.position;
+        Vector3 toTarget = target - car.transform.position;
         toTarget.y = 0;
 
         //目的地が左右どちらにあるか判定する

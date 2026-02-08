@@ -25,7 +25,7 @@ public class EnemyController : EnemyComponent
     float invincibleTimer = 0f;                         //無敵状態カウントダウン
     public float invincibleTime = 2f;                   //無敵時間
     public bool IsInvincible => isInvincible;
-
+    public float SpeedMagnification = 0.9f;
 
     [Header("Ground Check")]
     [SerializeField] private LayerMask groundLayer;
@@ -87,11 +87,12 @@ public class EnemyController : EnemyComponent
 
         // 前進
         float currentSpeed = Rigidbody.linearVelocity.magnitude;
-        float currentMax = maxSp;
+        float currentMax = maxSp* SpeedMagnification;
 
         if (grounded && currentSpeed < currentMax)
         {
             Rigidbody.AddForce(transform.forward * 0.4f * accel, ForceMode.Acceleration);
+            //Debug.Log("go");
         }
         //速度制限  
         Vector3 v = Rigidbody.linearVelocity;
@@ -139,7 +140,7 @@ public class EnemyController : EnemyComponent
         // 壁（tag=wall）に当たった時のみ処理
         if (IsWall(collision.gameObject))
         {
-            Debug.Log("HIT WALL: " + collision.gameObject.name);
+            //Debug.Log("HIT WALL: " + collision.gameObject.name);
             //無敵中はノックバックしない
             if (IsInvincible)
             {

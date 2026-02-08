@@ -84,6 +84,8 @@ GameObject:
   - component: {fileID: 3769358976105871410}
   - component: {fileID: 7471932148523540549}
   - component: {fileID: 5289977331263449237}
+  - component: {fileID: -3860360629560832797}
+  - component: {fileID: 8751450084675154816}
   m_Layer: 0
   m_Name: EnemyCar
   m_TagString: Player
@@ -233,6 +235,53 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
   PartsContainer: {fileID: 3769358976105871410}
+--- !u!195 &-3860360629560832797
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765880531328942072}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &8751450084675154816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765880531328942072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0585b7dfd9f8c8042bf5b8dea075c5c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::test_rigi
+  enemyController: {fileID: 7471932148523540549}
+  speed: 0
+  Next_Corner: {x: 0, y: 0, z: 0}
+  agent: {fileID: -3860360629560832797}
+  target: {fileID: 0}
+  target_pos: {x: 0, y: 0, z: 0}
+  NexCornerRight: 0
+  angle_below: 15
+  angle_above: 20
+  Inside_score: 100
+  cpulevel: 0
+  Inside_score_Random: 0
+  angle_Random: 0
 --- !u!1 &1116719818426671010
 GameObject:
   m_ObjectHideFlags: 0

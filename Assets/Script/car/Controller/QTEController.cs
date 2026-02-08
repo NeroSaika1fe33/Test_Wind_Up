@@ -127,7 +127,7 @@ public class QTEController : CarComponent
         if (Hud.QTEPanel != null)
             Hud.QTEPanel.SetActive(true);
 
-        if (Hud.InfoText != null) Hud.InfoText.text = "A Dキーを連打しよう!";
+        if (Hud.InfoText != null) Hud.InfoText.text = "左スティックを回そう!";
 
         if (isStartGameQTE && Hud.timerText != null)
         {
