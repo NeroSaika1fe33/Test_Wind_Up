@@ -158,6 +158,11 @@ public class LevelManager : MonoBehaviour
             LoadScene(SceneList.Title);
             PlayerDataManager.Instance.Save();
         }
+
+        if(Input.GetKeyDown(KeyCode.F1))
+        {
+            LoadScene(SceneList.Title);
+        }
     }
 
     public SceneList GetCurrentScene()
