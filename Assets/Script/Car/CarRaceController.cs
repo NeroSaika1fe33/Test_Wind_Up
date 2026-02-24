@@ -9,7 +9,7 @@ public class CarRaceController : CarComponent
     float Time1000 = 0; //タイマーを整数にしたもの(誤差修正用)
 
     [Header("Checkpoint")]
-    private int CheckpointIndex { get; set; } = -1;
+    private int CheckpointIndex { get; set; } = 0;
     private Transform CurrentTransform;
     private GoalTime GoalTime { get; set; }
 
