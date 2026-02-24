@@ -7,7 +7,7 @@ public class CarController : CarComponent
     public bool canControl = true;
     [SerializeField] private LayerMask wallLayer;
 
-
+    public EnemyController[] enemyController;
     private CarGroundChecker Ground => GetComponent<CarGroundChecker>();
     private CarLocomotion Locomotion => GetComponent<CarLocomotion>();
     private CarCrashHandler Crash => GetComponent<CarCrashHandler>();
@@ -100,6 +100,12 @@ public class CarController : CarComponent
     public void OnStartQTESuccess()
     {
         canControl = true;
+        /*
+        for (int i=0; i < enemyController.Length; i++)
+        {
+            enemyController[i].timer = 0.0f;
+        }
+        */
         // StartQTE Boost
         var rb = car.Rigidbody;
         Vector3 dir = transform.forward; dir.y = 0f; dir.Normalize();

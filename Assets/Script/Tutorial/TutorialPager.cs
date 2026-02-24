@@ -186,8 +186,8 @@ public class TutorialPager : MonoBehaviour
         if (hintText != null)
         {
             hintText.text = allowSkipWithX
-                ? "Z/Enter: next   X: skip"
-                : "Z/Enter: next";
+                ? "次へ/Aボタン   スキップ:Bボタン"
+                : "次へ/Aボタン";
         }
     }
 

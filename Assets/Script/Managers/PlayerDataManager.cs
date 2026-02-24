@@ -52,6 +52,7 @@ public class PlayerDataManager : MonoBehaviour
     //データ保存用
     public void Save()
     {
+        Debug.Log("最高速度"+playerStats.maxSpeed);
         PlayerSaveData saveData = new PlayerSaveData(
             playerName,
             playerID,

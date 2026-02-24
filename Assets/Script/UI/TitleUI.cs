@@ -10,6 +10,10 @@ public class TitleUI : MonoBehaviour
     [SerializeField] private Button yesButton;
     [SerializeField] private Button noButton;
 
+    float ignoreSubmitUntil = 0f;
+    bool waitingSubmitRelease = false;
+    bool IgnoreSubmit => Time.unscaledTime < ignoreSubmitUntil;
+
     [Header("Stick Settings")]
      private float stickThreshold = 0.5f;
      private float navCooldown = 0.18f;
@@ -39,42 +43,36 @@ public class TitleUI : MonoBehaviour
 
     void Update()
     {
-      
+
         if (!inPrompt)
         {
-            if (Input.anyKeyDown)
+            if (!inPrompt)
             {
-                OpenPrompt();
+                var g = Gamepad.current;
+                if (g != null && g.startButton.wasPressedThisFrame)
+                {
+                    OpenPrompt();
+                    IgnoreSubmitFor(0.35f);
+                }
+                return;
             }
-            return;
-        }
 
-        if (justOpenedPrompt)
-        {
-            justOpenedPrompt = false;
-            return;
-        }
 
-        // 2)左右選択（Keyboard A/D/←→；Gamepad Dpad/Stick）
-        int lr = ReadLeftRightOnce();
-        if (lr != 0)
-        {
-            index = (index + lr + buttons.Length) % buttons.Length;
-            SelectCurrent();
-        }
+            if (IgnoreSubmit) return;
 
-        // 3) Confirm（Keyboard Enter/Space；Gamepad A）
-        if (SubmitPressed())
-        {
-            buttons[index].onClick.Invoke();
-        }
+            int lr = ReadLeftRightOnce();
+            if (lr != 0)
+            {
+                index = (index + lr + buttons.Length) % buttons.Length;
+                SelectCurrent();
+            }
 
-        // 4) Cancel（Keyboard Esc；Gamepad B）
-        if (CancelPressed())
-        {
-            ClosePrompt();
+            if (SubmitPressed())
+            {
+                buttons[index].onClick.Invoke();
+            }
+         }
         }
-    }
 
     private void OpenPrompt()
     {
@@ -138,6 +136,7 @@ public class TitleUI : MonoBehaviour
 
         bool pad = Gamepad.current != null && Gamepad.current.buttonSouth.wasPressedThisFrame;
 
+     
         return kb || pad;
     }
 
@@ -199,4 +198,11 @@ public class TitleUI : MonoBehaviour
 
         return 0;
     }
+
+    void IgnoreSubmitFor(float seconds = 0.35f)
+    {
+        ignoreSubmitUntil = Time.unscaledTime + seconds;
+    }
+
+    
 }

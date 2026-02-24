@@ -4,14 +4,17 @@ public enum ItemType
 {
     None,
     Boost,
-    Missile,
-    Banana
+    test1,
+    test2
 }
 
 public class ItemHolder : MonoBehaviour
 {
     [Header("Runtime")]
     public ItemType currentItem = ItemType.None;
+
+    private CarEntity carEntity;
+    private PartBuffController BuffController;
 
     public bool HasItem => currentItem != ItemType.None;
 
@@ -32,15 +35,24 @@ public class ItemHolder : MonoBehaviour
         switch (currentItem)
         {
             case ItemType.Boost:
-                
+                if (BuffController != null)
+                {
+                    BuffController.ActivateByItem(ItemType.Boost);
+                }
+                else
+                {
+                    Debug.LogWarning("[ItemHolder] TemporaryPartBuffController not found.");
+                }
                 break;
 
-            case ItemType.Missile:
-               
+            case ItemType.test1:
+                
+                Debug.Log("[ItemHolder]test1 ŽÀ‘•‚µ‚Ä‚È‚¢");
                 break;
 
-            case ItemType.Banana:
+            case ItemType.test2:
                 
+                Debug.Log("[ItemHolder] test2 ŽÀ‘•‚µ‚Ä‚È‚¢");
                 break;
         }
 

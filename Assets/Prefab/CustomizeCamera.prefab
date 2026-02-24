@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1281699619821745526}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.18910737, y: 0.00000014722285, z: -0.000000028352508, w: 0.9819564}
+  m_LocalRotation: {x: 0.18910737, y: 0.00000014722283, z: -0.000000028352503, w: 0.9819564}
   m_LocalPosition: {x: -1.2127571, y: 3.0800018, z: -4.1083374}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -289,7 +289,7 @@ MonoBehaviour:
     AngularDampingMode: 1
     RotationDamping: {x: 1, y: 1, z: 1}
     QuaternionDamping: 1
-  FollowOffset: {x: 0, y: 2, z: -6}
+  FollowOffset: {x: 0, y: 3, z: -8}
 --- !u!114 &7704685165125205554
 MonoBehaviour:
   m_ObjectHideFlags: 0

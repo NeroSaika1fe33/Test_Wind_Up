@@ -77,6 +77,8 @@ public class TrackSelectionUI : MonoBehaviour
         if (now < nextNavTime) return 0;
 
         // KeyboardFW/S ˆ½ ª/«
+
+        /*
         if (Keyboard.current != null)
         {
             if (Keyboard.current.wKey.wasPressedThisFrame || Keyboard.current.upArrowKey.wasPressedThisFrame)
@@ -118,7 +120,7 @@ public class TrackSelectionUI : MonoBehaviour
                 return +1;
             }
         }
-
+        */
         return 0;
     }
 

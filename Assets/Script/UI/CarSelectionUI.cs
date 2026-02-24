@@ -19,7 +19,7 @@ public class CarSelectionUI : MonoBehaviour
     public TextMeshProUGUI[] dataTexts;
 
     [Header("StatsData")]
-    private string[] statsName = { "MaxSpeed", "Accerleration", "Weight" };
+    private string[] statsName = { "最大速度", "加速度", "重さ" };
 
     [Header("Input")]
     private bool updateSignal = false;  //true:入力がある　false:入力がない
@@ -59,7 +59,7 @@ public class CarSelectionUI : MonoBehaviour
 
     private void InitPartsUI()
     {
-        Topic.text = $"Parts Selection";
+        Topic.text = $"パーツ選択";
         for (int i = 0; i < 3; i++)
         {
             string prefix = (i == currentRow) ? "> " : "  ";
@@ -78,8 +78,8 @@ public class CarSelectionUI : MonoBehaviour
         bool selectionChanged = false;
 
         //メニュー制御
-        Vector2Int dir = ReadNavigateOnce();
-
+        Vector2Int dir =  ReadNavigateOnce();
+       
         // 上下 row
         if (dir.y > 0)
         {
@@ -161,7 +161,7 @@ public class CarSelectionUI : MonoBehaviour
 
         string partName = items[currentRow][selected[currentRow]];
         string partID = PartsDataManager.Instance.Get_PartsID(partName);
-
+        
         switch (currentRow)
         {
             case 0:
@@ -221,6 +221,7 @@ public class CarSelectionUI : MonoBehaviour
         var g = Gamepad.current;
         if (g != null && x == 0 && y == 0)
         {
+
             if (g.dpad.up.wasPressedThisFrame) y = +1;
             else if (g.dpad.down.wasPressedThisFrame) y = -1;
             else if (g.dpad.left.wasPressedThisFrame) x = -1;

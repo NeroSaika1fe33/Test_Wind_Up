@@ -27,6 +27,14 @@ public class LevelManager : MonoBehaviour
 
     public GameObject Car { get; set; } = null;
 
+    private float inputLockUntil = 0f;
+    private bool InputLocked => Time.unscaledTime < inputLockUntil;
+
+    private void LockInput(float seconds = 0.35f)
+    {
+        inputLockUntil = Time.unscaledTime + seconds;
+    }
+
     private void Awake()
     {
         if (Instance != this)
@@ -110,6 +118,8 @@ public class LevelManager : MonoBehaviour
     //シーン遷移判定
     public void LoadScene(SceneList _NextSceneName)
     {
+        LockInput(0.35f);
+
         switch (_NextSceneName)
         {
             case SceneList.Title:
@@ -139,18 +149,29 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
+        if (InputLocked) return;
 
+        //  F1：タイトルに戻る
+        if (Keyboard.current != null && Keyboard.current.f1Key.wasPressedThisFrame)
+        {
+            if (CurrentScene != SceneList.Title)
+            {
+                LoadScene(SceneList.Title);
+            }
+            return; 
+        }
         //シーン遷移操作
         // Confirm（Keyboard Enter / Gamepad buttons）
-        if (SubmitPressedThisFrame() && CurrentScene == SceneList.Track_Selection)
+        if (SubmitPressedThisFrame() && CurrentScene == SceneList.Car_Selection)
         {
             LoadScene(SceneList.In_Game);
         }
 
-        if (SubmitPressedThisFrame() && CurrentScene == SceneList.Car_Selection)
+       /* if (SubmitPressedThisFrame() && CurrentScene == SceneList.Car_Selection)
         {
             LoadScene(SceneList.Track_Selection);
         }
+       */
 
         
         if (AnyKeyboardOrGamepadPressedThisFrame() && CurrentScene == SceneList.Result)
@@ -175,7 +196,7 @@ public class LevelManager : MonoBehaviour
             "InGame" => SceneList.In_Game,
             "Result" => SceneList.Result,
             "Ranking" => SceneList.Ranking,
-            "Tutotial" => SceneList.Tutorial,
+            "Tutorial" => SceneList.Tutorial,
             "TrackSelection" => SceneList.Track_Selection,
             "InGame_ForDebug" => SceneList.In_Game,   //debug用
             _ => throw new ArgumentOutOfRangeException(nameof(sceneName), $"不明なシーン名: {sceneName}")

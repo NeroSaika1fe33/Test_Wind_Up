@@ -55,7 +55,7 @@ public class CarDriftModule : CarComponent
         bool isTurning = Mathf.Abs(inputH) > 0.1f;
         bool pressed = Input.GetKeyDown(driftKey) || GamepadDriftPressed(); ;
 
-        if (speed >= driftMinSpeed && isAccelerating && isTurning && pressed)
+        if (speed >= driftMinSpeed && isAccelerating  && pressed)
         {
             state = DriftState.Preparing;
             timer = 0f;
@@ -70,9 +70,8 @@ public class CarDriftModule : CarComponent
         var g = Gamepad.current;
         if (g == null) return false;
 
-        //R1/L1=ドリフト
-        return g.rightShoulder.wasPressedThisFrame
-            || g.leftShoulder.wasPressedThisFrame; 
+        //Y =ドリフト
+        return g.buttonNorth.wasPressedThisFrame; 
     }
 
 

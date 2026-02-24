@@ -9,7 +9,7 @@ public class EnemyController : EnemyComponent
     private Rigidbody Rigidbody => car.Rigidbody;
 
     public bool canControl = false;
-    private float timer = 5.0f;
+    public float timer = 5.0f;
     [SerializeField] private LayerMask wallLayer;
 
     [Header("Wall Knockback")]
@@ -87,7 +87,7 @@ public class EnemyController : EnemyComponent
 
         // ëOêi
         float currentSpeed = Rigidbody.linearVelocity.magnitude;
-        float currentMax = maxSp;
+        float currentMax = maxSp *0.8f;
 
         if (grounded && currentSpeed < currentMax)
         {

@@ -251,7 +251,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u9078\u629E:A/D\n\u6C7A\u5B9A:Enter"
+  m_text: "\u9078\u629E:\u5DE6\u53F3\n\u6C7A\u5B9A:A"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
@@ -698,7 +698,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 59f6adaf6949f4947bbbb3c5964d54c5, type: 3}
+  m_Resource: {fileID: 8300000, guid: 226ac0abb0263c747bb712e4a92e1136, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1246,7 +1246,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 166, y: -68}
+  m_AnchoredPosition: {x: 73, y: -68}
   m_SizeDelta: {x: 600, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1207663745
@@ -1269,7 +1269,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u4EFB\u610F\u30AD\u30FC\u3092\u62BC\u3059"
+  m_text: "\u30B9\u30BF\u30FC\u30C8\u3092\u62BC\u3057\u3066\u304F\u3060\u3055\u3044"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 714226ae63b888a4794b37a8ff06ff16, type: 2}
   m_sharedMaterial: {fileID: -5936284624409512360, guid: 714226ae63b888a4794b37a8ff06ff16, type: 2}
@@ -2265,8 +2265,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 54, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 132, y: -205}
+  m_SizeDelta: {x: 130, y: 190}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1891803869
 MonoBehaviour:
@@ -2288,7 +2288,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 999c4dd7520af1b4dae37b9c3b55d470, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e0adc0aba52f7ed4a9032d19828c83d4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

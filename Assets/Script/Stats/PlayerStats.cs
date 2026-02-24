@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using UnityEditor.Build.Content;*/
 using UnityEngine;
+using UnityEngine.InputSystem;
 /*using UnityEngine.UIElements.Experimental;*/
 
 [System.Serializable]
 public class PlayerStats : MonoBehaviour, IStats
 {
+    [Header("Stick")]
+    private bool _stickUsed;
+    bool stickRight = false;
+    bool stickLeft = false;
 
     [Header("PlayData")]
     public float maxSpeed { get; set; }
@@ -16,7 +21,7 @@ public class PlayerStats : MonoBehaviour, IStats
     public string result {  get; set; }
 
     private PlayerPartsContainer Car;
-
+    private CarSelectionUI SelectionUI;
     public Part[] parts { get; private set; } = new Part[3];
 
     [Header("InGame")]
@@ -97,14 +102,28 @@ public class PlayerStats : MonoBehaviour, IStats
 
     void Update()
     {
+        if (Gamepad.current != null)
+        {
+            float x = Gamepad.current.leftStick.x.ReadValue();
+
+            if (!_stickUsed && x > 0.6f) { stickRight = true; _stickUsed = true; }
+            if (!_stickUsed && x < -0.6f) { stickLeft = true; _stickUsed = true; }
+            if (Mathf.Abs(x) < 0.2f) _stickUsed = false; // –ß‚Á‚½‚ç‰ðœ
+        }
+
         if (LevelManager.Instance.GetCurrentScene() == SceneList.Car_Selection)
         {
             if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
             {
+               UpdateParts();
+               UpdatePartsStats();
+            }
+            if (stickLeft || stickRight)
+            {
                 UpdateParts();
                 UpdatePartsStats();
+             }
             }
-        }
 
         if (LevelManager.Instance.GetCurrentScene() == SceneList.Result)
         {

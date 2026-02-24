@@ -28,6 +28,7 @@ public class CarEntity : CarComponent
 
     public CarAudio CarAudio { get; private set; }
 
+    public PartBuffController PartBuffController { get; private set; }
     //マルチプレイのため
     //public static readonly List<Entity> Cars = new List<CarEntity>();
 
@@ -45,6 +46,7 @@ public class CarEntity : CarComponent
         QTEController = GetComponent<QTEController>();
         CarAudio = GetComponent<CarAudio>();
         PlayerPartsContainer = GetComponent<PlayerPartsContainer>();
+        PartBuffController = GetComponent<PartBuffController>();
     }
 
     private void Start()

@@ -70,7 +70,7 @@ public class CarRaceController : CarComponent
     }
     public short Get_Time_s()//タイマーの秒を返す
     {
-        return (short)(Timer / 1);
+        return (short)(Timer % 60 / 1);
     }
     public short Get_Time_m()//タイマーの分を返す
     {

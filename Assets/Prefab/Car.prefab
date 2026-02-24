@@ -97,6 +97,8 @@ GameObject:
   - component: {fileID: 1740027094608105067}
   - component: {fileID: 1145797130459419807}
   - component: {fileID: 6675245697860844731}
+  - component: {fileID: 4190127124776173130}
+  - component: {fileID: 7955479636663992135}
   m_Layer: 0
   m_Name: Car
   m_TagString: Player
@@ -285,6 +287,7 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 64
+  enemyController: []
   wallTag: Wall
   wallKnockbackSpeed: 20
   wallKnockbackUp: 2
@@ -335,9 +338,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarLocomotion
   autoForwardInput: 0.523
   turnSpeed: 3
-  steerSmooth: 6
+  steerSmooth: 1.5
   allowAirSteer: 1
   airTurnMultiplier: 0.35
+  itemMaxSpeedMultiplier: 1
+  itemAccelerationMultiplier: 1
 --- !u!114 &-4219455795802306977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -473,6 +478,38 @@ MonoBehaviour:
   Installation_Location_Wheel_FrontRight: {fileID: 4981725212695734841}
   Installation_Location_Wheel_BackRight: {fileID: 8336202540575072014}
   Installation_Location_Item: {fileID: 74467836825099166}
+--- !u!114 &4190127124776173130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765880531328942072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 797182504bed4f244b910a493bbc7c21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemHolder
+  currentItem: 1
+--- !u!114 &7955479636663992135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765880531328942072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e42eb220b1b866046a79e082cf7265e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PartBuffController
+  boostConfig:
+    itemType: 1
+    itemPartPrefabName: Item_Boost
+    durationMin: 5
+    durationMax: 10
+    maxSpeedMultiplier: 1.25
+    accelerationMultiplier: 1.15
 --- !u!1 &1116719818426671010
 GameObject:
   m_ObjectHideFlags: 0

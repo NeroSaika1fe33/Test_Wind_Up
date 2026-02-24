@@ -134,4 +134,17 @@ public class PlayerPartsContainer : CarComponent
         }
         PartsArrangement(ItemPrefabName, Installation_Location_Item);
     }
+
+    //Item parts‰ðœ(Œ©‚½–Ú)
+    public void ClearItemParts()
+    {
+        ItemPrefabName = null;
+
+        if (Installation_Location_Item != null && Installation_Location_Item.childCount > 0)
+        {
+            Destroy(Installation_Location_Item.GetChild(0).gameObject);
+        }
+
+        Debug.Log("[PlayerPartsContainer] ClearItemParts");
+    }
 }
