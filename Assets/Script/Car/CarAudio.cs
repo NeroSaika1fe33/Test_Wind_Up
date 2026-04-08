@@ -3,9 +3,9 @@ using UnityEngine;
 public class CarAudio : CarComponent
 {
     [Header("Audio Sources")]
-    public AudioSource oneShotSource;   //‚Ô‚Â‚©‚éAƒuƒXƒg‚È‚Çˆê‰ñ«
-    public AudioSource accelloopSource;      // accel loop—p
-    public AudioSource driftloopSource;// DRIFT loop—p
+    public AudioSource oneShotSource;   //ï¿½Ô‚Â‚ï¿½ï¿½ï¿½Aï¿½uï¿½Xï¿½gï¿½È‚Çˆï¿½ï¿½
+    public AudioSource accelloopSource;      // accel loopï¿½p
+    public AudioSource driftloopSource;// DRIFT loopï¿½p
     public AudioSource oneShotChargeSource;
 
     [Header("Clips")]
@@ -16,14 +16,14 @@ public class CarAudio : CarComponent
     public AudioClip ZenmaiLoop;
 
     [Header("Settings")]
-    [Range(0f, 1f)] public float volume = 1f;@//Inspector slider
+    [Range(0f, 1f)] public float volume = 1f;//Inspector slider
     public float crashCooldown = 0.15f;
 
     float lastCrashTime = -999f;
 
     void Awake()
     {
-        // ©•ª‚ÅAudioSource‘‚¦‚Ä‚È‚¢ê‡A©“®•â[
+        //æ—¥æœ¬èªå­¦æ ¡æ˜ç¢ºã«æ•£ç­–ã ã ã‚
         if (oneShotSource == null)
         {
             oneShotSource = gameObject.AddComponent<AudioSource>();
@@ -67,7 +67,7 @@ public class CarAudio : CarComponent
     void PlayOneShot(AudioClip clip, float volumeMul = 1f, float pitchMin = 0.95f, float pitchMax = 1.05f)
     {
         if (clip == null || oneShotSource == null) return;
-        oneShotSource.pitch = Random.Range(pitchMin, pitchMax); // ‰¹‚‚ğƒ‰ƒ“ƒ_ƒ€ <1:‚ä‚Á‚­‚èA’á‰¹@„‚PF‘¬‚­A‰¹‚
+        oneShotSource.pitch = Random.Range(pitchMin, pitchMax); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ <1:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½á‰¹ï¿½@ï¿½ï¿½ï¿½Pï¿½Fï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½ï¿½
         oneShotSource.PlayOneShot(clip, volume * volumeMul);
         oneShotSource.pitch = 1f;
     }
